@@ -1,7 +1,7 @@
 # MCOS: Monte Carlo OTAR Simulator #
-This is the code for the Monte Carlo OTAR Simulator
+This is the code for the Monte Carlo OTAR Simulator.
 
-This is the overall readme that will need a lot more description and detail.
+This is the overall readme that will need a lot more description and detail. The template for this readme was written by Adrien Perkins.
 
 For now, you can find some helpful tips and overview in the following sections:
 
@@ -12,7 +12,7 @@ For now, you can find some helpful tips and overview in the following sections:
 
 ## Setup ##
 
-The easiest way to "setup" everything to be able to use the toolbox seamlessly in MATLAB is to add the `pppanal` directory to your MATLAB path.  This will make everything within that directory accessible to you anywhere in MATLAB.
+The easiest way to "setup" everything to be able to use the toolbox seamlessly in MATLAB is to add the `mcos` directory to your MATLAB path.  This will make everything within that directory accessible to you anywhere in MATLAB.
 
 
 ## Git Branch Structure ##
@@ -21,7 +21,7 @@ You'll notice that the repository currently has several branches.  Just want to 
 
  - **master** - the master branch is the most recent, fully working and tested version of the code.  Think of this as what would be the stable production release build.
  - **development** - the development branch contains a nearly fully stable version of the code that has some of the newest features developed.  Each feature should be individually tested and known to work, but if there are issues caused by two features interacting, that can be handled on the development branch if needed (in general, you should make sure your feature isn't breaking any of the code before pushing to development).
- - **feature-branch** - all other branches should be where you are actively developing a feature (e.g. 'ppp-filter' would be where the ppp filter is being developed).  Naming should be clear and simple with `-` used as the character for spaces as desired.  NOTE: when working on a feature, you might have a good working subset of that feature which can be pushed to development if you want, you don't need to wait until the entire feature is built out.
+ - **feature-branch** - all other branches should be where you are actively developing a feature (e.g. 'broadcast-algorithm-feature' would be where the broadcast algorithm is being developed).  Naming should be clear and simple with `-` used as the character for spaces as desired.  NOTE: when working on a feature, you might have a good working subset of that feature which can be pushed to development if you want, you don't need to wait until the entire feature is built out.
 
 ## Naming Conventions ##
 
@@ -53,7 +53,7 @@ The top level directory (where this is file is) contains 3 directories:
 
 ### The Toolbox ###
 
-As mentioned above, the toolbox itself is contained in the `pppanal` directory.  The toolbox uses some specific MATLAB syntax to name some of the directories (for specific details, check out [this link](https://www.mathworks.com/help/matlab/matlab_oop/scoping-classes-with-packages.html)).
+As mentioned above, the toolbox itself is contained in the `mcos` directory.  The toolbox uses some specific MATLAB syntax to name some of the directories (for specific details, check out [this link](https://www.mathworks.com/help/matlab/matlab_oop/scoping-classes-with-packages.html)).
 
 A short summary of MATLAB directory syntax:
 
