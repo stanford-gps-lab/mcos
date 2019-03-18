@@ -61,6 +61,26 @@ classdef ConfigParameters < handle
         % generate the broadcast.
         BroadcastGenerator
         
+        % QChannelCRCBits - Number of bits reserved for CRC for each
+        % signature frame
+        QChannelCRCBits
+        
+        % Level1PublicKeyLengthBits - Number of bits used for the level 1
+        % public key
+        Level1PublicKeyLengthBits
+        
+        % Level2PublicKeyLengthBits - Number of bits used for the level 2
+        % public key
+        Level2PublicKeyLengthBits
+        
+        % TESLAKeyLengthBits - Number of bits used for the TESLA key
+        TESLAKeyLengthBits
+        
+        % TESLAMACLengthBits - Number of bits used for the TESLA MAC
+        TESLAMACLengthBits
+        
+        % TESLASaltLengthBits
+        TESLASaltLengthBits
         
     end
     
@@ -77,7 +97,7 @@ classdef ConfigParameters < handle
             % Parse inputs
             res = mcos.internal.parseConfig(varargin{:});
             
-            % Temporary
+            % Assign Parsed Statements
             obj.Scheme = res.Scheme;
             obj.SaveData = res.SaveData;
             obj.Frequency = res.Frequency;
@@ -91,9 +111,20 @@ classdef ConfigParameters < handle
             obj.WeightingScheme = res.WeightingScheme;
             obj.MessageConfiguration = res.MessageConfiguration;
             obj.BroadcastGenerator = res.BroadcastGenerator;
+            obj.QChannelCRCBits = res.QChannelCRCBits;
+            obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;
+            obj.Level2PublicKeyLengthBits = res.Level2PublicKeyLengthBits;
             
-            
-            
+            % Null TESLA parameters if ECDSA is used
+            if (strcmp(obj.Scheme, 'TESLA'))
+                obj.TESLAKeyLengthBits = res.TESLAKeyLengthBits;
+                obj.TESLAMACLengthBits = res.TESLAMACLengthBits;
+                obj.TESLASaltLengthBits = res.TESLASaltLengthBits;
+            else
+                obj.TESLAKeyLengthBits = [];
+                obj.TESLAMACLengthBits = [];
+                obj.TESLASaltLengthBits = [];
+            end
             
         end
         

@@ -59,6 +59,31 @@ parser.addParameter('MessageConfiguration', []) % TODO: Take away '[]' when you 
 % BroadcastGenerator
 parser.addParameter('BroadcastGenerator', []) % TODO: Take away '[]' when you have created BroadcastGenerator
 
+% QChannelCRCBits
+validQChannelCRCBitsFn = @(x) (floor(x) == x) && (x >= 0);
+parser.addParameter('QChannelCRCBits', 0, validQChannelCRCBitsFn)
+
+% Level1PublicKeyLengthBits
+validLevel1PublicKeyLengthBitsFn = @(x) (x == 224) || (x == 256) || (x == 384);
+parser.addParameter('Level1PublicKeyLengthBits', validLevel1PublicKeyLengthBitsFn)
+
+% Level2PublicKeyLengthBits
+validLevel2PublicKeyLengthBitsFn = @(x) (x == 224) || (x == 256) || (x == 384);
+parser.addParameter('Level2PublicKeyLengthBits', validLevel2PublicKeyLengthBitsFn)
+
+% TESLAKeyLengthBits
+validTESLAKeyLengthBitsFn = @(x) (floor(x) == x) && (x > 0);
+parser.addParameter('TESLAKeyLengthBits', validTESLAKeyLengthBitsFn)
+
+% TESLAMACLengthBits
+validTESLAMACLengthBitsFn = @(x) (floor(x) == x) && (x > 0);
+parser.addParameter('TESLAMACLengthBits', validTESLAMACLengthBitsFn)
+
+% TESLASaltLengthBits
+validTESLASaltLengthBitsFn = @(x) (floor(x) == x) && (x >= 0);
+parser.addParameter('TESLASaltLengthBits', validTESLASaltLengthBitsFn)
+
+
 
 
 
