@@ -9,7 +9,7 @@ classdef ConfigParameters < handle
         % Scheme - scheme to be run, TESLA or ECDSA
         Scheme
         
-        % SaveData - Boolean: 1 in order to save the data generated
+        % SaveData - Boolean: true or false
         SaveData
         
         % Frequency - 'L5' or 'L1'
@@ -78,18 +78,19 @@ classdef ConfigParameters < handle
             res = mcos.internal.parseConfig(varargin{:});
             
             % Temporary
-            obj.Scheme = 0;
-            obj.SaveData = 0;
-            obj.Frequency = 0;
-            obj.Channel = 0;
-            obj.NumDiffKeys = 0;
-            obj.PER = 0;
-            obj.MinLengthOTARMessage = 0;
-            obj.TBA = 0;
-            obj.SimLength = 0;
-            obj.NumUsers = 0;
-            obj.WeightingScheme = 0;
-            obj.MessageConfiguration = 0;
+            obj.Scheme = res.Scheme;
+            obj.SaveData = res.SaveData;
+            obj.Frequency = res.Frequency;
+            obj.Channel = res.Channel;
+            obj.NumDiffKeys = res.NumDiffKeys;
+            obj.PER = res.PER;
+            obj.MinLengthOTARMessage = res.MinLengthOTARMessage;
+            obj.TBA = res.TBA;
+            obj.SimLength = res.SimLength;
+            obj.NumUsers = res.NumUsers;
+            obj.WeightingScheme = res.WeightingScheme;
+            obj.MessageConfiguration = res.MessageConfiguration;
+            obj.BroadcastGenerator = res.BroadcastGenerator;
             
             
             

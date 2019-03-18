@@ -1,0 +1,34 @@
+classdef MessageConfiguration < handle
+    % MessageConfiguration  a container for information pertaining to the
+    % message configuration format to be broadcast. This class contains all
+    % information about the OTAR messages.
+    
+    properties (SetAccess = immutable)
+        % OMTNum - OTAR Message Type number
+        OMTNum
+        
+        % OMTLength - Length of OMT in bits
+        OMTLength
+        
+        % OMTDescription - Description of the OMT
+        OMTDescription
+        
+    end
+    
+    methods
+        
+        %Constructor
+        function obj = MessageConfiguration(OMTNum, OMTLength, OMTDescription)
+            % TODO: Build a constructor for MessageConfiguration
+        end
+        
+    end
+    
+    
+    methods (Static)
+        % TODO: Create a method that can pull out information for a given
+        % OMT
+    end
+    
+    
+end

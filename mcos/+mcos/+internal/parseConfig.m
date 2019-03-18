@@ -10,7 +10,7 @@ parser.addParameter('Scheme', validSchemeFn)
 
 % SaveData
 validSaveDataFn = @(x) (x == 0) || (x == 1);
-parser.addParameter('SaveData', validSaveDataFn)
+parser.addParameter('SaveData', 0, validSaveDataFn)
 
 % Frequency
 validFrequencyFn = @(x) (strcmp(x, 'L1')) || (strcmp(x, 'L5'));
@@ -22,15 +22,15 @@ parser.addParameter('Channel', validChannelFn)
 
 % NumDiffKeys
 validNumDiffKeysFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('NumDiffKeys', validNumDiffKeysFn)
+parser.addParameter('NumDiffKeys', 1, validNumDiffKeysFn)
 
 % PER
-validPERFn = @(x) (x > 0) && (x < 1);
-parser.addParameter('PER', validPERFn)
+validPERFn = @(x) (x >= 0) && (x < 1);
+parser.addParameter('PER', 0, validPERFn)
 
 % MinLengthOTARMessage
 validMinLengthOTARMessageFn = @(x) (floor(x) == x) && (x >= 0);
-parser.addParameter('MinLengthOTARMessage', validMinLengthOTARMessageFn)
+parser.addParameter('MinLengthOTARMessage', 0, validMinLengthOTARMessageFn)
 
 % TBA
 validTBAFn = @(x) (floor(x) == x) && (x > 0);
@@ -42,7 +42,7 @@ parser.addParameter('SimLength', validSimLengthFn)
 
 % NumUsers
 validNumUsersFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('NumUsers', validNumUsersFn)
+parser.addParameter('NumUsers', 1, validNumUsersFn)
 
 % WeightingScheme
 % validWeightingSchemeFn = @(x) % TODO: make a validWeightingSchemeFn when
