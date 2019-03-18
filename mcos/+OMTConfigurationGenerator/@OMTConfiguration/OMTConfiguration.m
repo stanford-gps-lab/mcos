@@ -1,4 +1,4 @@
-classdef MessageConfiguration < handle
+classdef OMTConfiguration < handle
     % MessageConfiguration  a container for information pertaining to the
     % message configuration format to be broadcast. This class contains all
     % information about the OTAR messages.
@@ -18,7 +18,7 @@ classdef MessageConfiguration < handle
     methods
         
         %Constructor
-        function obj = MessageConfiguration(OMTNum, OMTLength, OMTDescription)
+        function obj = OMTConfiguration(OMTNum, OMTLength, OMTDescription)
             % TODO: Build a constructor for MessageConfiguration
         end
         
