@@ -9,7 +9,7 @@ function configParameters = config()
 %% Assign configuration parameters to ConfigParameters
 
 % Simulation Parameters
-scheme = 'TESLA'; % Scheme - 'TESLA' or 'ECDSA'
+scheme = 'ECDSA'; % Scheme - 'TESLA' or 'ECDSA'
 saveData = true;   % SaveData - true or false
 frequency = 'L5';   % Frequency - 'L1' or 'L5'
 channel = 'Q';  % Channel - 'I' or 'Q'
@@ -31,30 +31,31 @@ teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA ke
 teslaMACLengthBits = 30;    % TESLAMACLengthBits [bits] - Length of the TESLA MAC
 teslaSaltLengthBits = 30;   % TESLASaltLengthBits [bits] - Length of the TESLA salt
 
-% % Plotting parameters
-% plottingParameters = {...
-%     'Total';                                        % Plots time to get all information
-%     %         'OMT';                                          % Plots time to get all OMTs individually
-%     'Authenticated current level 2 key';            % Plots time to get authenticated current level 2 key
-%     %         'Expiration of current keys';                   % Plots time to get expiration of current keys
-%     %         'Authenticated next level 2 key';               % Plots time to get authenticated next level 2 key
-%     %         'Expiration of next keys';                      % Plots time to get expiration of next keys
-%     %         'All authenticated current level 2 keys';       % Plots time to get all authenticated current level 2 keys, only if num_GUS_sites > 1
-%     %         'All expiration of current keys';               % Plots time to get expiration of all current keys, only if num_GUS_sites > 1
-%     %         'All authenticated next level 2 keys';          % Plots time to get all authenticated level 2 keys, only if num_GUS_sites > 1
-%     %         'All expiration of next keys';                  % Plots time to get all expiration of next keys, only if num_GUS_sites > 1
-%     %         'Authenticated private key for next root key';  % Plots time to get authenticated private key for next root key
-%     %         'Box and whisker';                              % Plots box and whisker plot for all above results except for OMT
-%     %         'Message sequence plot';                        % Plots message sequence in a stairs plot
-%     %         'Frequency of OTAR messages';                   % Plots frequency of OTAR message generation, in total, not taking time of each message into account
-%     %         'Bandwidth percentages'                       % Plots relative time taken by each message
+% Plotting parameters
+plottingParameters = {...
+    'Total';                                          % Plots time to get all information
+%     'OMT';                                            % Plots time to get all OMTs individually
+%     'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
+%     'Expiration of current keys';                     % Plots time to get expiration of current keys
+%     'Authenticated next level 2 key';                 % Plots time to get authenticated next level 2 key
+%     'Expiration of next keys';                        % Plots time to get expiration of next keys
+%     'All authenticated current level 2 keys';         % Plots time to get all authenticated current level 2 keys, only if NumDiffKeys > 1
+%     'All expiration of current keys';                 % Plots time to get expiration of all current keys, only if NumDiffKeys > 1
+%     'All authenticated next level 2 keys';            % Plots time to get all authenticated level 2 keys, only if NumDiffKeys > 1
+%     'All expiration of next keys';                    % Plots time to get all expiration of next keys, only if NumDiffKeys > 1
+%     'Authenticated private key for next root key';    % Plots time to get authenticated private key for next root key
+%     'Box and whisker';                                % Plots box and whisker plot for all above results except for OMT
+%     'Message sequence plot';                          % Plots message sequence in a stairs plot
+%     'Frequency of OTAR messages';                     % Plots frequency of OTAR message generation, in total, not taking time of each message into account
+%     'Bandwidth percentages'                           % Plots relative time taken by each message
 %     
 %     %%% TESLA Only %%%
-%     'Authenticated current TESLA key and salt';% Plot time to get authenticated TESLA key and salt
-%     'Authenticated current level 2 key';            % Plots time to get authenticated current level 2 key
-%     %         'Authenticated next TESLA key and salt';% Plot time to get authenticated next TESLA key and salt
-%     %         'All Authenticated current fast/slow keys and salt'; % Plot time to get all authenticated current fast, slow and salt, only if num_GUS_sites > 1
-%     };
+%     'Authenticated current TESLA key and salt';       % Plot time to get authenticated TESLA key and salt
+%     'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
+%     'Authenticated next TESLA key and salt';          % Plot time to get authenticated next TESLA key and salt
+%     'All authenticated current TESLA keys and salt';  % Plot time to get all authenticated current TESLA keys and salt, only if NumDiffKeys > 1
+%     'All authenticated next TESLA keys and salt';     % Plot time to get all authenticated next TESLA keys and salt, only if NumDiffKeys > 1
+    };
 
 
 %% Write values to ConfigParameters class
@@ -77,7 +78,8 @@ configParameters = mcos.ConfigParameters(...
     'Level2PublicKeyLengthBits', level2PublicKeyLengthBits,...
     'TESLAKeyLengthBits', teslaKeyLengthBits,...
     'TESLAMACLengthBits', teslaMACLengthBits,...
-    'TESLASaltLengthBits', teslaSaltLengthBits...
+    'TESLASaltLengthBits', teslaSaltLengthBits,...
+    'PlottingParameters', plottingParameters...
     );
 
 end

@@ -83,6 +83,10 @@ parser.addParameter('TESLAMACLengthBits', validTESLAMACLengthBitsFn)
 validTESLASaltLengthBitsFn = @(x) (floor(x) == x) && (x >= 0);
 parser.addParameter('TESLASaltLengthBits', validTESLASaltLengthBitsFn)
 
+% PlottingParameters
+validPlottingParametersFn = @(x) isa(x, 'cell');
+parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)
+
 
 
 

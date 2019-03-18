@@ -79,8 +79,13 @@ classdef ConfigParameters < handle
         % TESLAMACLengthBits - Number of bits used for the TESLA MAC
         TESLAMACLengthBits
         
-        % TESLASaltLengthBits
+        % TESLASaltLengthBits - Length of the salt used for each TESLA
+        % keychain in bits
         TESLASaltLengthBits
+        
+        % PlottingParameters - cell array describing which plots are
+        % desired when running this code
+        PlottingParameters
         
     end
     
@@ -114,6 +119,7 @@ classdef ConfigParameters < handle
             obj.QChannelCRCBits = res.QChannelCRCBits;
             obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;
             obj.Level2PublicKeyLengthBits = res.Level2PublicKeyLengthBits;
+            obj.PlottingParameters = res.PlottingParameters;
             
             % Null TESLA parameters if ECDSA is used
             if (strcmp(obj.Scheme, 'TESLA'))
