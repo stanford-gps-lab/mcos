@@ -1,4 +1,4 @@
-classdef ConfigParameters < handle
+classdef ConfigParameters
     % ConfigParameters - Class of configuration parameters set by the
     % config.m file.
     
