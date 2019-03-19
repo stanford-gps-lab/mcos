@@ -2,6 +2,9 @@
 % This script is used to generate .mat files with OMTConfigurations
 clear; close all; clc;
 
+%% OMTConfiguration Filename
+filename = 'ECDSA_RevA';
+
 %% Set the OMT Parameters
 % Format: Nx3 cell array, where N are the number of messages defined
 % First column: OMT Number as an integer
@@ -11,18 +14,44 @@ clear; close all; clc;
 % Ex: omtConfig = {1, 224, 'ECDSA level 2 public key';...
 %                  2, 768, 'ECDSA level 1 signature of level 2 public key';...
 %                  ...etc.}
+% 
+% Notes: - For fields that have no defined bit structure yet, leave 2nd 
+%          column as []
 
+% ECDSA_RevA
 level2PublicKeyLengthBits = 224;
 level1PublicKeyLengthBits = 384;
 
 omtConfig = {...
+    0, [], 'No OTAR information available';...
     1, level2PublicKeyLengthBits, 'ECDSA current level 2 public key';...
     2, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of current level 2 public key';...
     3, 34*2, 'Expiration time of current level 2 public key and level 1 public key, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x2 for both levels of keys.';...
     4, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 3';...
     5, level2PublicKeyLengthBits, 'ECDSA next level 2 public key';...
-    6, level1PublicKeyLengthBits*2, ''
+    6, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 5';...
+    7, 34*2, 'Expiration time of next level 2 public key and level 1 public key, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x2 for both levels of keys.';...
+    8, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 7';...
+    12, level1PublicKeyLengthBits, 'ECDSA level 1 current public key';...
+    13, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 12, self-signed public key';...
+    14, level1PublicKeyLengthBits, 'ECDSA level 1 next public key';...
+    15, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 14';...
     };
+
+% TESLA_RevA
+
+%% Save OMTConfiguration File
+currentDir = pwd;
+
+% Change path to save data in OMTConfigurationFiles directory
+cd ..
+cd OMTConfigurationFiles
+save(filename, 'omtConfig')     % Save only omtConfig variable
+cd(currentDir)
+
+
+
+
 
 
 
