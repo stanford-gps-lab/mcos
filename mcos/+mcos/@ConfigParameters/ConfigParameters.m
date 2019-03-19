@@ -82,11 +82,12 @@ classdef ConfigParameters < handle
         % TESLASaltLengthBits - Length of the salt used for each TESLA
         % keychain in bits
         TESLASaltLengthBits
-        
+    end
+    
+    properties (Transient = true)
         % PlottingParameters - cell array describing which plots are
         % desired when running this code
         PlottingParameters
-        
     end
     
     % Constructor
