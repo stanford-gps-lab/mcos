@@ -55,7 +55,7 @@ classdef ConfigParameters < handle
         % MessageConfiguration - Grabs the message configuration used for
         % this run. Allows the user to create an OTAR message configuration
         % file to test its performance.
-        MessageConfiguration
+        OMTConfigurationFile
         
         % BroadcastGenerator - Selects which function will be used to
         % generate the broadcast.
@@ -115,7 +115,7 @@ classdef ConfigParameters < handle
             obj.SimLength = res.SimLength;
             obj.NumUsers = res.NumUsers;
             obj.WeightingScheme = res.WeightingScheme;
-            obj.MessageConfiguration = res.MessageConfiguration;
+            obj.OMTConfigurationFile = res.OMTConfigurationFile;
             obj.BroadcastGenerator = res.BroadcastGenerator;
             obj.QChannelCRCBits = res.QChannelCRCBits;
             obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;

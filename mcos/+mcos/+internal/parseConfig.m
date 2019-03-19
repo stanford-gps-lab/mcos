@@ -52,7 +52,7 @@ parser.addParameter('WeightingScheme', [])
 % MessageConfiguration
 % TODO: make a validMessageConfigurationFn when you have chosen how to do
 % MessageConfiguration
-parser.addParameter('MessageConfiguration', []) % TODO: Take away '[]' when you have created MessageConfiguration files
+parser.addParameter('OMTConfigurationFile', []) % TODO: Take away '[]' when you have created MessageConfiguration files
 
 % BroadcastGenerator
 % TODO: make a validBroadcastGeneratorFn when you have chosen how to do
@@ -86,10 +86,6 @@ parser.addParameter('TESLASaltLengthBits', validTESLASaltLengthBitsFn)
 % PlottingParameters
 validPlottingParametersFn = @(x) isa(x, 'cell');
 parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)
-
-
-
-
 
 %% Run parser and set results
 parser.parse(varargin{:})
