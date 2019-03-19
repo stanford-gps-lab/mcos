@@ -10,6 +10,8 @@ function [omtFullLength, omtHeaderBits] = getOMTFullLength(omtConfig, configPara
 maxOMTNum = max(cell2mat(omtConfig(:,1)));
 omtHeaderBits = ceil(log2(maxOMTNum));
 
+% Calculate the full number of bits required for each OMT
+
 
 
 

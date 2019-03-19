@@ -26,6 +26,8 @@ if (isa(configParameters, 'char'))
 end
 
 %% Perform sanity check on run parameters
+% TODO: Check to make sure that the key lengths in config.m match the
+% loaded OMTConfigurationFile
 
 %% Run Simulator
 

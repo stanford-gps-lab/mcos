@@ -2,7 +2,7 @@
 clear; close all;% clc;
 
 %% Load data
-filename = 'test';
+filename = 'saveData';
 load(filename);
 
 %% Set Plotting parameters
