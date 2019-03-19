@@ -32,6 +32,10 @@ end
 %% Plot results
 
 %% Save data (if requested)
+if configParameters.SaveData
+    save('saveData')
+end
+
 
 
 

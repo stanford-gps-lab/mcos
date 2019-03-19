@@ -84,7 +84,7 @@ classdef ConfigParameters < handle
         TESLASaltLengthBits
     end
     
-    properties (Transient = true)
+    properties (Transient = true, Hidden = true)
         % PlottingParameters - cell array describing which plots are
         % desired when running this code
         PlottingParameters
