@@ -19,6 +19,10 @@ classdef OMTConfiguration < handle
         % OMTHeaderBits - How many bits are used in the OMTHeader
         OMTHeaderBits
         
+        % OMTNumFrames - How many authentication frames required to deliver
+        % the OMT
+        OMTNumFrames
+        
     end
     
     methods
@@ -71,7 +75,7 @@ classdef OMTConfiguration < handle
     
     methods (Static)
         % TODO: Create a method for determining the OMTLength given other inputs from configParameters
-        [omtFullLength, omtHeaderBits] = getOMTFullLength(omtConfig, configParameters)
+        [omtFullLength, omtHeaderBits, omtNumFrames] = getOMTFullLength(omtConfig, configParameters)
     end
     
     

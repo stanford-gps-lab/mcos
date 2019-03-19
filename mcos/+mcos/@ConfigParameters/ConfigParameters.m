@@ -138,14 +138,17 @@ classdef ConfigParameters
     end
     
     methods
-        % TODO: define any methods here
+        % Define any methods here
         
     end
     
     
     methods (Static)
-        % TODO: define static methods here
+        % Define static methods here
         
+        % TODO: Create a method for finding how many bits available for
+        % OTAR in each authentication frame
+        otarMessageLengthBits = getOTARMessageLengthBits()
     end
     
     
