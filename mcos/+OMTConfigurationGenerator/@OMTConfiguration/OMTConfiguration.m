@@ -16,6 +16,9 @@ classdef OMTConfiguration < handle
         % OMTFullLength - Length of OMT including OMT# and Sequence#
         OMTFullLength
         
+        % OMTHeaderBits - How many bits are used in the OMTHeader
+        OMTHeaderBits
+        
     end
     
     methods
@@ -49,6 +52,7 @@ classdef OMTConfiguration < handle
             % Calculate the OMTFullLength using the OTMConfiguration file
             % and this simulation's configParameters
             
+            
             % Temporary
             derp = configParameters;
             obj.OMTFullLength = 0;
@@ -60,13 +64,14 @@ classdef OMTConfiguration < handle
     end
     
     methods
-        % TODO: Create a method for determining the OMTLength given other inputs from configParameters
+        % TODO: Create a method that can pull out information for a given
+        % OMT
         
     end
     
     methods (Static)
-        % TODO: Create a method that can pull out information for a given
-        % OMT
+        % TODO: Create a method for determining the OMTLength given other inputs from configParameters
+        [omtFullLength, omtHeaderBits] = getOMTFullLength(omtConfig, configParameters)
     end
     
     

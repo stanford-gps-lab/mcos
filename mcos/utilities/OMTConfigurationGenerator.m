@@ -40,6 +40,18 @@ omtConfig = {...
 
 % TESLA_RevA
 
+%% Complete sanity check on input values
+% Check to make sure that OMTNum are valid and non-repeated
+if any(cell2mat(omtConfig(:,1)) < 0)
+    error('Only positive integers are valid OTAR Message Type numbers')
+end
+if any(~isequal(cell2mat(omtConfig(:,1)), floor(cell2mat(omtConfig(:,1)))))
+    error('Only positive integers are valid OTAR Message Type numbers')
+end
+if (length(cell2mat(omtConfig(:,1))) ~= length(unique(cell2mat(omtConfig(:,1)))))
+   error('OTAR Message Type numbers must be non-repeating') 
+end
+
 %% Save OMTConfiguration File
 currentDir = pwd;
 

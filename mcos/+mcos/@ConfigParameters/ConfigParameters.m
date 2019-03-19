@@ -96,7 +96,7 @@ classdef ConfigParameters
         function obj = ConfigParameters(varargin)
             
             % handle an empty constructor
-            if nargin == 0
+            if nargin < 1
                 error('No configurations input.')
             end
             
@@ -145,7 +145,7 @@ classdef ConfigParameters
     
     methods (Static)
         % TODO: define static methods here
-        obj = createFromLoadData(filename) % TODO: Make function to create ConfigParameters from LoadData
+        
     end
     
     
