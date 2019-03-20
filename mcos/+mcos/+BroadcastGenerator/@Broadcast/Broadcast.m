@@ -7,12 +7,19 @@ classdef Broadcast
         % order in which they are broadcast
         BroadcastArray
         
+        % Algorithm - Character array denoting which broadcast generating
+        % algorithm is being used
+        Algorithm
+        
+        % WeightingSchemeFile - Character array denoting which
+        % WeightingSchemeFile was used for this simulation
+        WeightingSchemeFile
     end
     
     % Constructor
     methods
        
-        function obj = Broadcast(varargin)
+        function obj = Broadcast(weightingSchemeFile)
             
             % Handle empty constructor
             if nargin < 1
@@ -20,7 +27,9 @@ classdef Broadcast
             end
             
             % Assign properties using generateBroadcast
-            obj = generateBroadcast(varargin{:});
+            temp = mcos.BroadcastGenerator.Broadcast.generateBroadcast(weightingSchemeFile);
+            obj.Algorithm = temp.Algorithm;
+            obj.WeightingSchemeFile = temp.WeightingSchemeFile;
             
             % Temporary
             obj.BroadcastArray = 0;
@@ -31,7 +40,7 @@ classdef Broadcast
     
     methods (Static)
        % TODO: Create a broadcast generator using Hameed's algorithm
-       obj = generateBroadcast(varargin);
+       obj = generateBroadcast(weightingSchemeFile);
     end
     
     

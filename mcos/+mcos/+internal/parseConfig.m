@@ -45,11 +45,11 @@ validNumUsersFn = @(x) (floor(x) == x) && (x > 0);
 parser.addParameter('NumUsers', 1, validNumUsersFn)
 
 % WeightingSchemeFile
-validWeightingSchemeFileFn = @(x) (isempty(x)) || (strcmp(x(end-3), '.mat'));
+validWeightingSchemeFileFn = @(x) (isempty(x)) || (strcmp(x(end-3:end), '.mat'));
 parser.addParameter('WeightingSchemeFile', [], validWeightingSchemeFileFn)
 
 % MessageConfiguration
-validOMTConfigurationFileFn = @(x) (strcmp(x(end-3), '.mat'));
+validOMTConfigurationFileFn = @(x) (strcmp(x(end-3:end), '.mat'));
 parser.addParameter('OMTConfigurationFile', validOMTConfigurationFileFn)
 
 % BroadcastGenerator
