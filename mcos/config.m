@@ -17,7 +17,7 @@ if nargin < 1 % Skip if plotData is being called
     tba = 6;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
     simLength = 1000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = [];   % WeightingScheme - Can be an array for sensitivity analyses. TODO: WeightingScheme to be defined. 
+    weightingSchemeFile = [];   % WeightingSchemeFile - Can be an array for sensitivity analyses. TODO: WeightingScheme to be defined. 
     omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     broadcastGenerator = [];    % BroadcastGenerator - Which function to call when generating OMT broadcast
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel

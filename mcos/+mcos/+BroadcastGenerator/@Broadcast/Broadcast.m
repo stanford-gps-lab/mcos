@@ -22,6 +22,9 @@ classdef Broadcast
             % Assign properties using generateBroadcast
             obj = generateBroadcast(varargin{:});
             
+            % Temporary
+            obj.BroadcastArray = 0;
+            
         end
         
     end

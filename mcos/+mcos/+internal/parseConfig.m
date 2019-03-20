@@ -45,7 +45,7 @@ validNumUsersFn = @(x) (floor(x) == x) && (x > 0);
 parser.addParameter('NumUsers', 1, validNumUsersFn)
 
 % WeightingSchemeFile
-validWeightingSchemeFileFn = @(x) (strcmp(x(end-3), '.mat'));
+validWeightingSchemeFileFn = @(x) (isempty(x)) || (strcmp(x(end-3), '.mat'));
 parser.addParameter('WeightingSchemeFile', [], validWeightingSchemeFileFn)
 
 % MessageConfiguration
@@ -86,7 +86,11 @@ validPlottingParametersFn = @(x) isa(x, 'cell');
 parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)
 
 %% Run parser and set results
-parser.parse(varargin{:})
+try
+    parser.parse(varargin{:})
+catch
+    error('Error while parsing inputs from config.m')
+end
 res = parser.Results;
 
 

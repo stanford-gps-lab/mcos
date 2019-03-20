@@ -17,6 +17,9 @@ catch ME
     if (strcmp(ME.identifier, 'MATLAB:run:FileNotFound'))
         error('config.m not found. Make sure to have it in the current working directory.')
     end
+    if (strcmp(ME.identifier, 'MATLAB:badsubscript'))
+       error('Check inputs to config.m. May have a parser error.') 
+    end
     disp(ME.identifier) % Display error identifier for debug purposes
 end
 
