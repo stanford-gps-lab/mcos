@@ -17,8 +17,8 @@ omtHeaderBits = ceil(log2(maxOMTNum));
 % Calculate the full number of bits required for each OMT
 for i = 1:length(omtNum)
    M = omtDataLength(i);    % Grab OMTDataLength
-   temp1 = ceil(M/configParameters.OTARMessageLengthBits) + 1;
-   temp2 = ceil(M/configParameters.OTARMessageLengthBits);
+%    temp1 = ceil(M/configParameters.OTARMessageLengthBits) + 1;
+%    temp2 = ceil(M/configParameters.OTARMessageLengthBits);
    % TODO: Grab this information from subclass SBASAuthenticationMessage
 end
 

@@ -5,6 +5,7 @@ classdef SBASMessage < handle
     properties (SetAccess = immutable)
         % SBASMessageLength - Length of the SBAS message in bits
         SBASMessageLength
+        
     end
     
     % Constructor
@@ -14,7 +15,7 @@ classdef SBASMessage < handle
             
             % Handle empty constructor
             if nargin < 1
-               obj.SBASMessageLength = 250;     % 250 bits for most SBAS Messages
+                obj.SBASMessageLength = 250;     % 250 bits for most SBAS Messages
             end
             
         end
@@ -22,7 +23,9 @@ classdef SBASMessage < handle
     end
     
     methods
-       % Add methods here 
+        % Add methods here
     end
-        
+    
 end
+
+% TODO: Make subclasses for SBASECDSAMessage and SBASTESLAMessage
