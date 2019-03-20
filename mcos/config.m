@@ -7,23 +7,22 @@ function configParameters = config(plotStr)
 
 if nargin < 1 % Skip if plotData is being called
     % Simulation Parameters
-    scheme = 'TESLA'; % Scheme - 'TESLA' or 'ECDSA'
+    scheme = 'ECDSA'; % Scheme - 'TESLA' or 'ECDSA'
     saveData = true;   % SaveData - true or false
     frequency = 'L5';   % Frequency - 'L1' or 'L5'
     channel = 'Q';  % Channel - 'I' or 'Q'
     numDiffKeys = 1;    % NumDiffKeys - Number of different keys used to sign data. Nominally 1.
-    per = 0;    % PER - Page Error Rate. Nominally 0.
+    per = 0;    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
     minLengthOTARMessage = 0;   % MinLengthOTARMessage [messages] - minimum length that an OTAR message is. Nominally 0.
     tba = 6;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
     simLength = 1000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingScheme = [];   % WeightingScheme - TODO: WeightingScheme to be defined
-    omtConfigurationFile = 'TESLA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
+    weightingSchemeFile = [];   % WeightingScheme - Can be an array for sensitivity analyses. TODO: WeightingScheme to be defined. 
+    omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     broadcastGenerator = [];    % BroadcastGenerator - Which function to call when generating OMT broadcast
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
-    % TODO: Make key lengths dependent upon the OMTConfiguration chosen
     
     % TESLA parameters
     teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA keys
@@ -74,7 +73,7 @@ configParameters = mcos.ConfigParameters(...
     'TBA', tba,...
     'SimLength', simLength,...
     'NumUsers', numUsers,...
-    'WeightingScheme', weightingScheme,...
+    'WeightingSchemeFile', weightingSchemeFile,...
     'OMTConfigurationFile', omtConfigurationFile,...
     'BroadcastGenerator', broadcastGenerator,...
     'QChannelCRCBits', qChannelCRCBits,...

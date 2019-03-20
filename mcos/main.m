@@ -45,6 +45,9 @@ end
 % TODO: Make a class for SanityChecks
 
 %% Run Simulator
+% for i = 1:numIterations
+%    otarSimulator = OTARSimulator(,i) 
+% end
 
 %% Plot results
 

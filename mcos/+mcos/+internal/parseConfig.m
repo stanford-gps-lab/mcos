@@ -44,15 +44,13 @@ parser.addParameter('SimLength', validSimLengthFn)
 validNumUsersFn = @(x) (floor(x) == x) && (x > 0);
 parser.addParameter('NumUsers', 1, validNumUsersFn)
 
-% WeightingScheme
-% validWeightingSchemeFn = @(x) % TODO: make a validWeightingSchemeFn when
-% you have chosen how to do WeightingScheme
-parser.addParameter('WeightingScheme', [])
+% WeightingSchemeFile
+validWeightingSchemeFileFn = @(x) (strcmp(x(end-3), '.mat'));
+parser.addParameter('WeightingSchemeFile', [], validWeightingSchemeFileFn)
 
 % MessageConfiguration
-% TODO: make a validMessageConfigurationFn when you have chosen how to do
-% MessageConfiguration
-parser.addParameter('OMTConfigurationFile', []) % TODO: Take away '[]' when you have created MessageConfiguration files
+validOMTConfigurationFileFn = @(x) (strcmp(x(end-3), '.mat'));
+parser.addParameter('OMTConfigurationFile', validOMTConfigurationFileFn)
 
 % BroadcastGenerator
 % TODO: make a validBroadcastGeneratorFn when you have chosen how to do

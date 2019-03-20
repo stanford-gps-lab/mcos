@@ -50,7 +50,7 @@ classdef ConfigParameters
         % WeightingScheme - Denotes the function that will be used to
         % weight the relative importance of each OTAR message or
         % sub-message.
-        WeightingScheme
+        WeightingSchemeFile
         
         % MessageConfiguration - Grabs the message configuration used for
         % this run. Allows the user to create an OTAR message configuration
@@ -114,7 +114,7 @@ classdef ConfigParameters
             obj.TBA = res.TBA;
             obj.SimLength = res.SimLength;
             obj.NumUsers = res.NumUsers;
-            obj.WeightingScheme = res.WeightingScheme;
+            obj.WeightingSchemeFile = res.WeightingSchemeFile;
             obj.OMTConfigurationFile = res.OMTConfigurationFile;
             obj.BroadcastGenerator = res.BroadcastGenerator;
             obj.QChannelCRCBits = res.QChannelCRCBits;
@@ -136,20 +136,5 @@ classdef ConfigParameters
         end
         
     end
-    
-    methods
-        % Define any methods here
-        
-    end
-    
-    
-    methods (Static)
-        % Define static methods here
-        
-    end
-    
-    
-    
-    
     
 end
