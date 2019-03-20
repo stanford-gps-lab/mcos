@@ -42,8 +42,7 @@ elseif (strcmp(configParameters.Scheme, 'TESLA'))
        error('TESLA parameters in config.m must match those in the chosen OMTConfigurationFile') 
     end
 end
-
-
+% TODO: Make a class for SanityChecks
 
 %% Run Simulator
 
