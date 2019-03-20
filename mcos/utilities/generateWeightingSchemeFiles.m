@@ -22,6 +22,6 @@ currentDir = pwd;
 % Change to WeightingSchemeFiles directory
 cd .. 
 cd +mcos/+BroadcastGenerator/weightingSchemeFiles
-save(filename, 'algorithm')
+save(filename, 'algorithm', 'inputWeights', 'weightAllocation', 'weights')
 cd(currentDir)
 cd ..
