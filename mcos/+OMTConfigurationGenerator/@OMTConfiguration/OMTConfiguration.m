@@ -44,7 +44,7 @@ classdef OMTConfiguration < handle
     methods
         
         %Constructor
-        function obj = OMTConfiguration(omtConfigurationFile, configParameters)
+        function obj = OMTConfiguration(configParameters)
             % TODO: Build a constructor for OMTConfiguration
             
             % Handle empty constructor
@@ -56,11 +56,11 @@ classdef OMTConfiguration < handle
             % If file exists, load the contents
             currentDir = pwd;
             cd OMTConfigurationFiles
-            if (~exist(omtConfigurationFile, 'file'))
+            if (~exist(configParameters.OMTConfigurationFile, 'file'))
                 cd ..
                 error('OMTConfiguration file not found. Make sure the full file (including .mat) is written correctly')
             else
-                load(omtConfigurationFile, 'omtConfig')
+                load(configParameters.OMTConfigurationFile, 'omtConfig')
             end
             cd(currentDir)
             
@@ -80,31 +80,18 @@ classdef OMTConfiguration < handle
             
             % Assign Properties from completeOMTConfiguration
             obj = obj.completeOMTConfiguration(configParameters);
-%             
-%             % Temporary
-%             derp = configParameters;
-%             obj.OMTFullLengthBits = 0;
-%             obj.NumDiffKeyBits = 0;
-%             obj.OMTSequenceNumBits = 0;
-%             obj.OMTNumFrames = 0;
-            
-            
             
         end
         
     end
     
     methods
-        % TODO: Create a method that can pull out information for a given
-        % OMT
-        
-        % TODO: Create a method for determining the OMTLength given other inputs from configParameters
+        % Add methods here
         obj = completeOMTConfiguration(obj, configParameters)
     end
     
     methods (Static)
-        
-        %         [omtFullLength, omtHeaderBits, omtNumFrames] = getOMTFullLength(omtConfig, configParameters)
+        % Add static methods here
     end
     
     
