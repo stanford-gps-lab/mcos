@@ -18,7 +18,7 @@ classdef SBASECDSAMessage < mcos.SBASMessage
         ECDSASignatureLengthBits
         
         % OMTLengthBits - Length of an OTAR message in bits
-        OMTLengthBits
+        OTARWordLengthBits
         
     end
     
@@ -51,7 +51,7 @@ classdef SBASECDSAMessage < mcos.SBASMessage
             obj.MessagesPerAuthenticationFrame = ceil((obj.ECDSASignatureLengthBits + obj.NumMessagesAuthenticationLengthBits)/obj.SBASDataFieldLength);
             
             % OMTLengthBits
-            obj.OMTLengthBits = ...
+            obj.OTARWordLengthBits = ...
                 obj.MessagesPerAuthenticationFrame*...
                 obj.SBASDataFieldLength - ...
                 obj.ECDSASignatureLengthBits - ...

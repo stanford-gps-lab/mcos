@@ -8,21 +8,37 @@ classdef OMTConfiguration < handle
         OMTNum
         
         % OMTDataLength - Length of OMT Data in bits
-        OMTDataLength
+        OMTDataLengthBits
         
         % OMTDescription - Description of the OMT
         OMTDescription
         
-        % OMTFullLength - Length of OMT including OMT# and Sequence#
-        OMTFullLength
+        % SBASAuthenticationMessage - The object that is either
+        % SBASECDSAMessage or SBASTESLAMessage depending on the
+        % configuration parameters.
+        SBASAuthenticationMessage
         
-        % OMTHeaderBits - How many bits are used in the OMTHeader
-        OMTHeaderBits
+    end
+    
+    properties (SetAccess = protected)
+        % OMTFullLengthBits - Length of OMT including OMT# and Sequence#
+        OMTFullLengthBits
+        
+        % OMTSequenceNumBits - Number of bits required to report the
+        % sequence number of an OMT if the OMT takes up multiple OTAR
+        % Frames
+        OMTSequenceNumBits
         
         % OMTNumFrames - How many authentication frames required to deliver
         % the OMT
         OMTNumFrames
-        
+                
+        % OMTHeaderBits - How many bits are used in the OMTHeader
+        OMTHeaderBits
+                
+        % NumDiffKeysBits - How many bits required to convey information
+        % about different data signature keys.
+        NumDiffKeysBits
     end
     
     methods
@@ -40,7 +56,7 @@ classdef OMTConfiguration < handle
             % If file exists, load the contents
             currentDir = pwd;
             cd OMTConfigurationFiles
-            if (~exist(omtConfigurationFile))
+            if (~exist(omtConfigurationFile, 'file'))
                 cd ..
                 error('OMTConfiguration file not found. Make sure the full file (including .mat) is written correctly')
             else
@@ -50,16 +66,27 @@ classdef OMTConfiguration < handle
             
             % Assign .mat inputs to appropriate attributes
             obj.OMTNum = omtConfig(:,1);
-            obj.OMTDataLength = omtConfig(:,2);
+            obj.OMTDataLengthBits = omtConfig(:,2);
             obj.OMTDescription = omtConfig(:,3);
             
             % Calculate the OMTFullLength using the OTMConfiguration file
-            % and this simulation's configParameters
+            % and this simulation's configParameters and the chosen
+            % sbasAuthenticationMessage
+            if (strcmp(configParameters.Scheme, 'ECDSA'))
+                obj.SBASAuthenticationMessage = mcos.SBASECDSAMessage(configParameters);
+            elseif (strcmp(configParameters.Scheme, 'TESLA'))
+                obj.SBASAuthenticationMessage = mcos.SBASTESLAMessage(configParameters);
+            end
             
-            
-            % Temporary
-            derp = configParameters;
-            obj.OMTFullLength = 0;
+            % Assign Properties from completeOMTConfiguration
+            obj = obj.completeOMTConfiguration(configParameters);
+%             
+%             % Temporary
+%             derp = configParameters;
+%             obj.OMTFullLengthBits = 0;
+%             obj.NumDiffKeyBits = 0;
+%             obj.OMTSequenceNumBits = 0;
+%             obj.OMTNumFrames = 0;
             
             
             
@@ -72,7 +99,7 @@ classdef OMTConfiguration < handle
         % OMT
         
         % TODO: Create a method for determining the OMTLength given other inputs from configParameters
-        obj = completeOMTConfiguration(obj, omtConfig, configParameters, sbasAuthenticationMessage)
+        obj = completeOMTConfiguration(obj, configParameters)
     end
     
     methods (Static)

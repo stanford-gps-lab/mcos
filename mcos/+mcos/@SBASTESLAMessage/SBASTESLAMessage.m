@@ -22,7 +22,7 @@ classdef SBASTESLAMessage < mcos.SBASMessage
         TESLAKeyLengthBits
         
         % OMTLengthBits - Length of an OTAR message in bits
-        OMTLengthBits
+        OTARWordLengthBits
         
     end
     
@@ -56,14 +56,13 @@ classdef SBASTESLAMessage < mcos.SBASMessage
             obj.MessagesPerAuthenticationFrame = ceil((obj.TESLAMACLengthBits + obj.TESLAKeyLengthBits + obj.NumMessagesAuthenticationLengthBits)/obj.SBASDataFieldLength);
             
             % OMTLengthBits
-            obj.OMTLengthBits = ...
+            obj.OTARWordLengthBits = ...
                 obj.MessagesPerAuthenticationFrame*...
                 obj.SBASDataFieldLength - ...
                 obj.TESLAMACLengthBits - ...
                 obj.TESLAKeyLengthBits - ...
                 obj.NumMessagesAuthenticationLengthBits;
-            
-            
+
         end
         
     end
