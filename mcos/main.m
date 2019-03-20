@@ -20,12 +20,29 @@ catch ME
     disp(ME.identifier) % Display error identifier for debug purposes
 end
 
+%% Construct SBAS and OMT messages from OMTConfigurationFile stated in config.m
+omtConfiguration = OMTConfigurationGenerator.OMTConfiguration(configParameters);
+
 %% Perform sanity check on run parameters
 % TODO: Check to make sure that the key lengths in config.m match the
 % loaded OMTConfigurationFile
+if (strcmp(configParameters.Scheme, 'ECDSA'))
+    if any([...
+            configParameters.Level1PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{2}*2;...
+            configParameters.Level2PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{1};...
+            ])
+       error('ECDSA keys in config.m must match those in the chosen OMTConfigurationFile') 
+    end
+elseif (strcmp(configParameters.Scheme, 'TESLA'))
+%     if any([...
+%             configParameters.Level1PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{2}*2;...
+%             configParameters.Level2PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{1};...
+%             ])
+%        error('TESLA parameters in config.m must match those in the chosen OMTConfigurationFile') 
+%     end
+end
 
-%% Generate SBAS and OMT messages from OMTConfigurationFile stated in config.m
-omtConfiguration = OMTConfigurationGenerator.OMTConfiguration(configParameters);
+
 
 %% Run Simulator
 
