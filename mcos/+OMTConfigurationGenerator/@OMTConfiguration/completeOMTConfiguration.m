@@ -1,4 +1,4 @@
-function [omtFullLength, omtHeaderBits, omtNumFrames] = getOMTFullLength(omtConfig, configParameters)
+function obj = completeOMTConfiguration(obj, omtConfig, configParameters, sbasAuthenticationMessage)
 % getOMTFullLength - a function that calculates the number of bits required
 % to deliver each OMT. Extra bits are required to identify which OMT is
 % being delivered, which sub-message is being delivered, and if there are
@@ -14,12 +14,20 @@ omtDataLength = cell2mat(omtConfig(:,2));
 maxOMTNum = max(omtNum);
 omtHeaderBits = ceil(log2(maxOMTNum));
 
+% Grab how many bits are availabe in OTAR Message
+omtLengthBits = sbasAuthenticationMessage.OTMLengthBits;
+
 % Calculate the full number of bits required for each OMT
 for i = 1:length(omtNum)
-   M = omtDataLength(i);    % Grab OMTDataLength
-%    temp1 = ceil(M/configParameters.OTARMessageLengthBits) + 1;
-%    temp2 = ceil(M/configParameters.OTARMessageLengthBits);
-   % TODO: Grab this information from subclass SBASAuthenticationMessage
+    M = omtDataLength(i);    % Grab OMTDataLength
+    temp1 = ceil(M/omtLengthBits) + 1;
+    temp2 = ceil(M/omtLengthBits);
+    while temp1 ~= temp2
+        temp1 = temp2;
+        
+        
+    end
+    % TODO: Grab this information from subclass SBASAuthenticationMessage
 end
 
 

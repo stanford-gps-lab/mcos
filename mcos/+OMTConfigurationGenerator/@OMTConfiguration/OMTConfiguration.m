@@ -71,11 +71,13 @@ classdef OMTConfiguration < handle
         % TODO: Create a method that can pull out information for a given
         % OMT
         
+        % TODO: Create a method for determining the OMTLength given other inputs from configParameters
+        obj = completeOMTConfiguration(obj, omtConfig, configParameters, sbasAuthenticationMessage)
     end
     
     methods (Static)
-        % TODO: Create a method for determining the OMTLength given other inputs from configParameters
-        [omtFullLength, omtHeaderBits, omtNumFrames] = getOMTFullLength(omtConfig, configParameters)
+        
+        %         [omtFullLength, omtHeaderBits, omtNumFrames] = getOMTFullLength(omtConfig, configParameters)
     end
     
     
