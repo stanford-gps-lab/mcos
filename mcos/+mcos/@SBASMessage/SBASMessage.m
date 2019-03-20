@@ -73,6 +73,3 @@ classdef SBASMessage < handle
     end
     
 end
-
-% TODO: Make subclasses for SBASECDSAMessage and SBASTESLAMessage
-% TODO: Delete subclass SBASAuthenticationMessage

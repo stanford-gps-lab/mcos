@@ -24,8 +24,8 @@ end
 omtConfiguration = OMTConfigurationGenerator.OMTConfiguration(configParameters);
 
 %% Perform sanity check on run parameters
-% TODO: Check to make sure that the key lengths in config.m match the
-% loaded OMTConfigurationFile
+% Check to make sure that the key lengths in config.m match the loaded 
+% OMTConfigurationFile
 if (strcmp(configParameters.Scheme, 'ECDSA'))
     if any([...
             configParameters.Level1PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{2}/2;...
@@ -34,12 +34,13 @@ if (strcmp(configParameters.Scheme, 'ECDSA'))
        error('ECDSA keys in config.m must match those in the chosen OMTConfigurationFile') 
     end
 elseif (strcmp(configParameters.Scheme, 'TESLA'))
-%     if any([...
-%             configParameters.Level1PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{2}*2;...
-%             configParameters.Level2PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{1};...
-%             ])
-%        error('TESLA parameters in config.m must match those in the chosen OMTConfigurationFile') 
-%     end
+    if any([...
+            configParameters.Level1PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{4}/2;...
+            configParameters.Level2PublicKeyLengthBits - omtConfiguration.OMTDataLengthBits{3};...
+            configParameters.TESLAKeyLengthBits + configParameters.TESLAMACLengthBits - omtConfiguration.OMTDataLengthBits{1}...
+            ])
+       error('TESLA parameters in config.m must match those in the chosen OMTConfigurationFile') 
+    end
 end
 
 

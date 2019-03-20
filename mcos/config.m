@@ -7,7 +7,7 @@ function configParameters = config(plotStr)
 
 if nargin < 1 % Skip if plotData is being called
     % Simulation Parameters
-    scheme = 'ECDSA'; % Scheme - 'TESLA' or 'ECDSA'
+    scheme = 'TESLA'; % Scheme - 'TESLA' or 'ECDSA'
     saveData = true;   % SaveData - true or false
     frequency = 'L5';   % Frequency - 'L1' or 'L5'
     channel = 'Q';  % Channel - 'I' or 'Q'
@@ -18,7 +18,7 @@ if nargin < 1 % Skip if plotData is being called
     simLength = 1000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
     weightingScheme = [];   % WeightingScheme - TODO: WeightingScheme to be defined
-    omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
+    omtConfigurationFile = 'TESLA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     broadcastGenerator = [];    % BroadcastGenerator - Which function to call when generating OMT broadcast
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
