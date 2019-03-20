@@ -10,18 +10,20 @@ filename = 'ECDSA_RevA';
 % First column: OMT Number as an integer
 % Second column: Length of OMT Data in bits as an integer
 % Third column: Short description of the OMT as a character string
-% 
+% Fourth column: List of defined groups of messages
+%
 % Ex: omtConfig = {1, 224, 'ECDSA level 2 public key';...
 %                  2, 768, 'ECDSA level 1 signature of level 2 public key';...
 %                  ...etc.}
-% 
-% Notes: - For fields that have no defined bit structure yet, leave 2nd 
+%
+% Notes: - For fields that have no defined bit structure yet, leave 2nd
 %          column as []
 
 % ECDSA_RevA
 level2PublicKeyLengthBits = 224;
 level1PublicKeyLengthBits = 384;
 
+% Define first three columns
 omtConfig = {...
     1, level2PublicKeyLengthBits, 'ECDSA current level 2 public key';...
     2, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of current level 2 public key';...
@@ -37,6 +39,22 @@ omtConfig = {...
     15, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 14';...
     };
 
+% Define final column for message groupings
+omtConfig = [omtConfig,...
+    {{'Total', 'Current level 2 public key'};... % 1
+    {'Total', 'Current level 2 public key'};... % 2
+    {'Total', 'Current level 2 public key expiration'};... % 3
+    {'Total', 'Current level 2 public key expiration'};... % 4
+    {'Total', 'Next level 2 public key'};... % 5
+    {'Total', 'Next level 2 public key'};... % 6
+    {'Total', 'Next level 2 public key expiration'};... % 7
+    {'Total', 'Next level 2 public key expiration'};... % 8
+    {'Total', 'Current level 1 public key'};... % 12
+    {'Total', 'Current level 1 public key'};... % 13
+    {'Total', 'Next level 1 public key'};... % 14
+    {'Total', 'Next level 1 public key'}... % 15
+    }];
+
 % TESLA_RevA
 
 %% Complete sanity check on input values
@@ -48,7 +66,7 @@ if any(~isequal(cell2mat(omtConfig(:,1)), floor(cell2mat(omtConfig(:,1)))))
     error('Only positive integers are valid OTAR Message Type numbers')
 end
 if (length(cell2mat(omtConfig(:,1))) ~= length(unique(cell2mat(omtConfig(:,1)))))
-   error('OTAR Message Type numbers must be non-repeating') 
+    error('OTAR Message Type numbers must be non-repeating')
 end
 
 %% Save OMTConfiguration File
