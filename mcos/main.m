@@ -20,14 +20,12 @@ catch ME
     disp(ME.identifier) % Display error identifier for debug purposes
 end
 
-% Load data if requested
-if (isa(configParameters, 'char'))
-    load(configParameters)
-end
-
 %% Perform sanity check on run parameters
 % TODO: Check to make sure that the key lengths in config.m match the
 % loaded OMTConfigurationFile
+
+%% Generate SBAS and OMT messages from OMTConfigurationFile stated in config.m
+omtConfiguration = OMTConfigurationGenerator.OMTConfiguration(configParameters);
 
 %% Run Simulator
 
