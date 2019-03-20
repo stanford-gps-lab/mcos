@@ -77,6 +77,7 @@ cd ..
 cd OMTConfigurationFiles
 save(filename, 'omtConfig')     % Save only omtConfig variable
 cd(currentDir)
+cd ..
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Past Iterations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

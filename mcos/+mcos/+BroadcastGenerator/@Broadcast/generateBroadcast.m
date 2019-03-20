@@ -14,7 +14,7 @@ obj = 0;
 
 end
 
-%%
+
 function res = parseBroadcast(varargin)
 % res = parseBroadcast(varargin)
 % 
