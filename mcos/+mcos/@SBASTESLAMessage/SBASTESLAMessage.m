@@ -1,5 +1,5 @@
-classdef SBASECDSAMessage < mcos.SBASMessage
-    % SBASECDSAMessage - a container for information pertaining to an ECDSA
+classdef SBASTESLAMessage < mcos.SBASMessage
+    % SBASTESLAMessage - a container for information pertaining to a TESLA
     % SBAS Authentication Message.
     
     properties (SetAccess = immutable)
@@ -14,8 +14,12 @@ classdef SBASECDSAMessage < mcos.SBASMessage
         % authentication frame.
         MessagesPerAuthenticationFrame
         
-        % ECDSASignatureLengthBits - Length of the ECDSA Signature in bits
-        ECDSASignatureLengthBits
+        % TESLAMACLengthBits - Number of bits used by the TESLA MAC. 0 if
+        % ECDSA is used.
+        TESLAMACLengthBits
+        
+        %TESLAKeyLengthBits - Number of bits used for the TESLA key
+        TESLAKeyLengthBits
         
         % OMTLengthBits - Length of an OTAR message in bits
         OMTLengthBits
@@ -25,7 +29,7 @@ classdef SBASECDSAMessage < mcos.SBASMessage
     % Constructor
     methods
         
-        function obj = SBASECDSAMessage(configParameters)
+        function obj = SBASTESLAMessage(configParameters)
             
             % Handle the empty constructor
             if nargin < 1
@@ -35,8 +39,9 @@ classdef SBASECDSAMessage < mcos.SBASMessage
             % Set properties from SBASMessage constructor.
             obj@mcos.SBASMessage(configParameters);
             
-            % Assign ECDSASignatureLengthBits
-            obj.ECDSASignatureLengthBits = configParameters.Level2PublicKeyLengthBits*2;
+            % Assign properties from configParamters
+            obj.TESLAMACLengthBits = configParameters.TESLAMACLengthBits;
+            obj.TESLAKeyLengthBits = configParameters.TESLAKeyLengthBits;
             
             % Preemptively assign certain properties to 0
             obj.NumMessagesAuthenticationLengthBits = 0;
@@ -48,22 +53,20 @@ classdef SBASECDSAMessage < mcos.SBASMessage
             
             % Calculate how many messages it will take to deliver an
             % authentication message frame
-            obj.MessagesPerAuthenticationFrame = ceil((obj.ECDSASignatureLengthBits + obj.NumMessagesAuthenticationLengthBits)/obj.SBASDataFieldLength);
+            obj.MessagesPerAuthenticationFrame = ceil((obj.TESLAMACLengthBits + obj.TESLAKeyLengthBits + obj.NumMessagesAuthenticationLengthBits)/obj.SBASDataFieldLength);
             
             % OMTLengthBits
             obj.OMTLengthBits = ...
                 obj.MessagesPerAuthenticationFrame*...
                 obj.SBASDataFieldLength - ...
-                obj.ECDSASignatureLengthBits - ...
+                obj.TESLAMACLengthBits - ...
+                obj.TESLAKeyLengthBits - ...
                 obj.NumMessagesAuthenticationLengthBits;
+            
             
         end
         
     end
-    
-    
-    
-    
     
     
     
