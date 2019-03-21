@@ -39,6 +39,10 @@ classdef OMTConfiguration < handle
         % NumDiffKeysBits - How many bits required to convey information
         % about different data signature keys.
         NumDiffKeysBits
+        
+        % OMTInd - Index of non-zero OMT messages
+        OMTInd
+        
     end
     
     methods

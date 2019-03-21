@@ -7,12 +7,10 @@ function obj = completeOMTConfiguration(obj, configParameters)
 % use. Also known as NumDiffKeys set in config.m.
 
 % Useful variables
-omtNum = cell2mat(obj.OMTNum);
-% omtNum = cell2mat(omtConfig(:,1));
-% omtDataLengthBits = cell2mat(omtConfig(:,2));
+obj.OMTInd = cell2mat(obj.OMTNum(cell2mat(obj.OMTDataLengthBits) ~= 0))'; % Grab the index of non-zero OMTs
 
 % Calculate how many bits needed for the OMT Header
-maxOMTNum = max(omtNum);
+maxOMTNum = max(cell2mat(obj.OMTNum));
 obj.OMTHeaderBits = ceil(log2(maxOMTNum));
 
 % Grab how many bits are availabe in OTAR Message
@@ -22,7 +20,7 @@ otarWordLengthBits = obj.SBASAuthenticationMessage.OTARWordLengthBits;
 obj.NumDiffKeysBits = ceil(log2(configParameters.NumDiffKeys));
 
 % Calculate the full number of bits required for each OMT
-for i = 1:length(omtNum)
+for i = obj.OMTInd
     temp1 = ceil(obj.OMTDataLengthBits{i}/otarWordLengthBits) + 1;
     temp2 = temp1 - 1;
     while temp1 ~= temp2
@@ -35,12 +33,6 @@ for i = 1:length(omtNum)
     end
     obj.OMTNumFrames(i,1) = temp2;
 end
-
-
-
-
-
-
 
 
 end
