@@ -61,6 +61,9 @@ classdef OTARSimulator < handle
                 % Simulate Broadcast
                 obj = obj.simulateBroadcast(configParameters, iteration);
                 
+                % Process Broadcast Results
+                obj = obj.processBroadcastResults(configParameters, omtConfiguration, iteration);
+                
                 % Iterate waitbar
                 if configParameters.DisplayOn
                    waitbar(iteration/configParameters.NumIterations, tWaitbar,...
@@ -81,8 +84,10 @@ classdef OTARSimulator < handle
         obj = partitionBroadcast(obj, configParameters, omtConfiguration, iteration);     % Partitions the generated broadcast into blocks making simulations much faster
         
         % Method for simulating the user experience
-        % TODO: write simulateBroadcast
         obj = simulateBroadcast(obj, configParameters, iteration);
+        
+        % Method for processing broadcast results
+        obj = processBroadcastResults(obj, configParamters, omtConfiguration, iteration);
         
     end
     
