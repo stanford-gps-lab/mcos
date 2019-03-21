@@ -25,7 +25,7 @@ validNumDiffKeysFn = @(x) (floor(x) == x) && (x > 0);
 parser.addParameter('NumDiffKeys', 1, validNumDiffKeysFn)
 
 % PER
-validPERFn = @(x) (x >= 0) && (x < 1);
+validPERFn = @(x) (min(x) >= 0) && (max(x) < 1);
 parser.addParameter('PER', 0, validPERFn)
 
 % MinLengthOTARMessage
@@ -81,9 +81,22 @@ parser.addParameter('TESLAMACLengthBits', validTESLAMACLengthBitsFn)
 validTESLASaltLengthBitsFn = @(x) (floor(x) == x) && (x >= 0);
 parser.addParameter('TESLASaltLengthBits', validTESLASaltLengthBitsFn)
 
+% NumIterations
+validNumIterationsFn = @(x) (floor(x) == x) && (x > 0);
+parser.addParameter('NumIterations', 1, validNumIterationsFn)
+
+% PERVector
+% validPERVectorFn = @(x) % TODO: Make validPERVectorFn
+parser.addParameter('PERVector', 1)
+
+% WeightsVector
+% validWeightsVectorFn = @(x) % TODO: Make validWeightsVectorFn
+parser.addParameter('WeightsVector', 1)
+
 % PlottingParameters
 validPlottingParametersFn = @(x) isa(x, 'cell');
 parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)
+
 
 %% Run parser and set results
 try

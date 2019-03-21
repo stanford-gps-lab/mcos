@@ -1,4 +1,4 @@
-classdef ConfigParameters
+classdef ConfigParameters < handle
     % ConfigParameters - Class of configuration parameters set by the
     % config.m file.
     
@@ -82,12 +82,30 @@ classdef ConfigParameters
         % TESLASaltLengthBits - Length of the salt used for each TESLA
         % keychain in bits
         TESLASaltLengthBits
+
+    end
+    
+    properties (SetAccess = public)         
+        % NumIterations - Number of iterations if there are multiple
+        % simulations that need to be run
+        NumIterations
+                
+        % PERVector - If there is a loop, that loop is either over multiple
+        % PERs or over other vectors. So there needs to be a vector of PER.
+        PERVector
+        
+        % WeightsVector - If there is a loop, that loop is either over
+        % multiple Weights or over other vectors. So there needs to be a
+        % vector of Weights.
+        WeightsVector
+        
     end
     
     properties (Transient = true, Hidden = true)
         % PlottingParameters - cell array describing which plots are
         % desired when running this code
         PlottingParameters
+
     end
     
     % Constructor
@@ -120,6 +138,9 @@ classdef ConfigParameters
             obj.QChannelCRCBits = res.QChannelCRCBits;
             obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;
             obj.Level2PublicKeyLengthBits = res.Level2PublicKeyLengthBits;
+            obj.NumIterations = res.NumIterations;
+            obj.PERVector = res.PERVector;
+            obj.WeightsVector = res.WeightsVector;
             obj.PlottingParameters = res.PlottingParameters;
             
             % Null TESLA parameters if ECDSA is used

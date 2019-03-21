@@ -7,6 +7,9 @@ classdef Broadcast
         % order in which they are broadcast
         BroadcastArray
         
+        % BroadcastMessageNum - OMT Message numbers that are broadcast
+        BroadcastMessageNum
+        
         % Algorithm - Character array denoting which broadcast generating
         % algorithm is being used
         Algorithm
@@ -14,33 +17,40 @@ classdef Broadcast
         % WeightingSchemeFile - Character array denoting which
         % WeightingSchemeFile was used for this simulation
         WeightingSchemeFile
+        
+        % Weights - Matrix of weights that are loaded from
+        % WeightingSchemeFile
+        Weights
     end
     
     % Constructor
     methods
-       
+        
         function obj = Broadcast(configParameters, omtConfiguration, iteration)
             
             % Handle empty constructor
             if nargin < 1
-               error('No broadcast algorithm has been input.') 
+                error('No broadcast algorithm has been input.')
             end
+            
+            % Assign some properties to 0
+            obj.Weights = 0;
             
             % Assign properties using generateBroadcast
             temp = mcos.BroadcastGenerator.Broadcast.generateBroadcast(configParameters, omtConfiguration, iteration);
             obj.Algorithm = temp.Algorithm;
             obj.WeightingSchemeFile = temp.WeightingSchemeFile;
-            
-            % Temporary
-            obj.BroadcastArray = 0;
+            obj.Weights = temp.Weights;
+            obj.BroadcastArray = temp.BroadcastArray;
+            obj.BroadcastMessageNum = temp.BroadcastMessageNum;
             
         end
         
     end
     
     methods (Static)
-       % TODO: Create a broadcast generator using Hameed's algorithm
-       obj = generateBroadcast(configParameters, iteration);
+        % TODO: Create a broadcast generator using Hameed's algorithm
+        obj = generateBroadcast(configParameters, omtConfiguration, iteration);
     end
     
     
