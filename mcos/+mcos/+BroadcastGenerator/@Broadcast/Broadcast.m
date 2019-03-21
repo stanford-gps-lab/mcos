@@ -19,7 +19,7 @@ classdef Broadcast
     % Constructor
     methods
        
-        function obj = Broadcast(weightingSchemeFile)
+        function obj = Broadcast(configParameters, omtConfiguration, iteration)
             
             % Handle empty constructor
             if nargin < 1
@@ -27,7 +27,7 @@ classdef Broadcast
             end
             
             % Assign properties using generateBroadcast
-            temp = mcos.BroadcastGenerator.Broadcast.generateBroadcast(weightingSchemeFile);
+            temp = mcos.BroadcastGenerator.Broadcast.generateBroadcast(configParameters, omtConfiguration, iteration);
             obj.Algorithm = temp.Algorithm;
             obj.WeightingSchemeFile = temp.WeightingSchemeFile;
             
@@ -40,7 +40,7 @@ classdef Broadcast
     
     methods (Static)
        % TODO: Create a broadcast generator using Hameed's algorithm
-       obj = generateBroadcast(weightingSchemeFile);
+       obj = generateBroadcast(configParameters, iteration);
     end
     
     

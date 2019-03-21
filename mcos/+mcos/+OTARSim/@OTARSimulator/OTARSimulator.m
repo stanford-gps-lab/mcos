@@ -14,7 +14,7 @@ classdef OTARSimulator < handle
     % Constructor
     methods
         
-        function obj = OTARSimulator(configParameters, omtConfiguration)
+        function obj = OTARSimulator(configParameters, omtConfiguration, iteration)
             
             % Handle empty constructor
             if nargin < 1
@@ -22,10 +22,9 @@ classdef OTARSimulator < handle
             end
             
             % Place holder variables
-            weightingSchemeFile = configParameters.WeightingSchemeFile;
             
             % Generate Broadcast
-            obj.OTARBroadcast = mcos.BroadcastGenerator.Broadcast(weightingSchemeFile);
+            obj.OTARBroadcast = mcos.BroadcastGenerator.Broadcast(configParameters, omtConfiguration, iteration);
             
         end
         
