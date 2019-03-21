@@ -11,6 +11,15 @@ classdef OTARSimulator < handle
         
     end
     
+    properties (Transient = true, Hidden = true)
+       % BlockRowNum - number of blocks
+       BlockRowNum
+       
+       % BroadcastMatrix
+       BroadcastMatrix
+       
+    end
+    
     % Constructor
     methods
         

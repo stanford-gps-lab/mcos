@@ -64,7 +64,8 @@ broadcastArray = broadcastArray(1:end - rem(length(broadcastArray), blockSize));
 
 % Report results
 obj.OTARBroadcast{iteration}.BroadcastArray = broadcastArray;  % Replace BroadcastArray to show the broadcastArray that was carried out in simulation.
-
+obj.BlockRowNum = blockRowNum;
+obj.BroadcastMatrix = broadcastMatrix;
 
 
 
