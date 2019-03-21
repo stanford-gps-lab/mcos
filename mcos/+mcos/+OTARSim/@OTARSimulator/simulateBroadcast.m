@@ -1,14 +1,21 @@
-function obj = simulateBroadcast(obj, configParameters, omtConfiguration, iteration)
+function obj = simulateBroadcast(obj, configParameters, iteration)
 % obj = simulateBroadcast(configParameters, omtConfiguration, iteration)
 %
 % Simulate the broadcast using toeplitz matrices on the previously
 % generated blocks. This code was copied almost exactly from the old code.
+
+% waitbar
+if configParameters.DisplayOn
+   bWaitbar = waitbar(0, 'Simulating User Experience...');  % Initialize waitbar 
+end
 
 % Useful variables
 blockRowNum = obj.BlockRowNum;
 broadcastMatrix = obj.BroadcastMatrix;
 numUsers = configParameters.NumUsers;
 per = configParameters.PERVector(iteration);
+totalNumMessages = obj.TotalNumMessages;
+blockSize = obj.BlockSize;
 
 for j = 1:blockRowNum
     
@@ -34,8 +41,29 @@ for j = 1:blockRowNum
     
     % dot-multiply perMat with subMessageSimMat to simulate missed messages
     subMessageSimMat = subMessageSimMat.*perMat;
+    
+    for i = 1:totalNumMessages % Loop through all sub messages (I know, for loops suck, but it was the only loop I couldn't figure out how to get rid of)
+        % Record when messages were received and NaN results that weren't
+        % received
+        [temp1, temp2] = max(subMessageSimMat == i, [], 2);
+        temp1 = double(temp1);  % Convert temp1 into a class double matrix
+        temp1(temp1 == 0) = NaN;    % Convert zero values to NaN because no max was found
+        temp3 = squeeze(temp1.*temp2);  % Finish converting values with no max to NaN
+        
+        % Record subMessage results
+        obj.SubMessageResults{iteration}((j-1)*blockSize + 1:j*blockSize, :, i) = single(temp3);    % Save space and store as a single-precision floating point. Has NaN so need floating point precision
+        
+        if configParameters.DisplayOn
+           waitbar((i + (j-1)*totalNumMessages)/(totalNumMessages*blockRowNum),...
+               bWaitbar,...
+               ['Looping through block ', num2str(j), ' of ', num2str(blockRowNum)]); 
+        end
+        
+    end
 end
 
-
+if configParameters.DisplayOn
+   close(bWaitbar) 
+end
 
 end

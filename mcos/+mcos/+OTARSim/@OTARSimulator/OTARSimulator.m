@@ -9,6 +9,10 @@ classdef OTARSimulator < handle
         % therein
         OTARBroadcast
         
+        % SubMessageResults - index of when sub messages were received for
+        % each simulation
+        SubMessageResults
+        
     end
     
     properties (Transient = true, Hidden = true)
@@ -17,6 +21,12 @@ classdef OTARSimulator < handle
        
        % BroadcastMatrix
        BroadcastMatrix
+       
+       % TotalNumMessages
+       TotalNumMessages
+       
+       % BlockSize - size of the blocks
+       BlockSize
        
     end
     
@@ -49,7 +59,7 @@ classdef OTARSimulator < handle
                 obj = obj.partitionBroadcast(configParameters, omtConfiguration, iteration);
                 
                 % Simulate Broadcast
-                obj = obj.simulateBroadcast(configParameters, omtConfiguration, iteration);
+                obj = obj.simulateBroadcast(configParameters, iteration);
                 
                 % Iterate waitbar
                 if configParameters.DisplayOn
@@ -72,7 +82,7 @@ classdef OTARSimulator < handle
         
         % Method for simulating the user experience
         % TODO: write simulateBroadcast
-        obj = simulateBroadcast(obj, configParameters, omtConfiguration, iteration);
+        obj = simulateBroadcast(obj, configParameters, iteration);
         
     end
     
