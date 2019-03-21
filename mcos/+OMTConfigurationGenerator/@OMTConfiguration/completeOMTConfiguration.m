@@ -10,8 +10,8 @@ function obj = completeOMTConfiguration(obj, configParameters)
 obj.OMTInd = cell2mat(obj.OMTNum(cell2mat(obj.OMTDataLengthBits) ~= 0))'; % Grab the index of non-zero OMTs
 
 % Calculate how many bits needed for the OMT Header
-maxOMTNum = max(cell2mat(obj.OMTNum));
-obj.OMTHeaderBits = ceil(log2(maxOMTNum));
+obj.MaxOMTNum = max(cell2mat(obj.OMTNum));
+obj.OMTHeaderBits = ceil(log2(obj.MaxOMTNum));
 
 % Grab how many bits are availabe in OTAR Message
 otarWordLengthBits = obj.SBASAuthenticationMessage.OTARWordLengthBits;

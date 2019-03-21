@@ -1,33 +1,38 @@
-function broadcastArray = generateHameedStandardBroadcast(configParameters, weights, omtConfiguration)
+function broadcastArray = generateHameedStandardBroadcast(configParameters, weights, omtConfiguration, iteration)
 % Generate broadcast array using algorithm from "Hameed - Efficient
 % algorithms for scheduling data broadcast"
 
 % Number of possible messages less message 0
 [~, numMessages] = size(weights);
 
-% Index messageFieldsInd
-messageFieldsInd = weights ~= 0;
-
 % Initialize bVec
 bVec = zeros(numMessages, 1);
 
 % Initialize cVec
 cVec = bVec;
-for i = messageFieldsInd
-   cVec(i) =  
-end
-    
-    
+for i = omtConfiguration.OMTInd
+    cVec(i) =
 end
 
-function sVec = generateSVec(configParameters, weights, messageFieldsInd, omtConfiguration)
+
+end
+
+function eVec = generateEVec(configParameters, omtConfiguration, iteration)
+% Find the error probability for each OMT (item)
+
+eVec = zeros(omtConfiguration.MaxOMTNum, 1);
+for i = omtConfigurationOMTInd
+    eVec(i) = 1 - (1 - configParameters.PER(iteration))^omtConfiguration.OMTNumFrames(i);
+end
+
+end
+
+function sVec = generateSVec(weights, messageFieldsInd, omtConfiguration)
 % Find first half of equation (5)
 temp = 0;
 for i = messageFieldsInd
-   temp = temp + sqrt(weights(i)*) 
+    temp = temp + sqrt(weights(i)*omtConfiguration.OMTNumFrames(i)*(1 + eVec(i))/(1 - eVec));
 end
-% TODO: Fix OMTConfiguration so the cell locations are related to the
-% message number
 
 
 end

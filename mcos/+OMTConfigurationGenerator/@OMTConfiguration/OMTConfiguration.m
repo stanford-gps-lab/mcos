@@ -43,6 +43,9 @@ classdef OMTConfiguration < handle
         % OMTInd - Index of non-zero OMT messages
         OMTInd
         
+        % MaxOMTNum - Largest OMT Number for this simulation
+        MaxOMTNum
+        
     end
     
     methods
