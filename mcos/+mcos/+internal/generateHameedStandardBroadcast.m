@@ -6,6 +6,7 @@ function [broadcastArray, broadcastMessageNum] = generateHameedStandardBroadcast
 % Read Weights from WeightsVector
 weights = configParameters.WeightsVector(iteration, :);
 
+%% Generate data stream using Hameed algorithm
 % Generate eVec and sVec
 eVec = generateEVec(configParameters, omtConfiguration, iteration);
 sVec = generateSVec(weights, omtConfiguration, eVec);
@@ -28,11 +29,6 @@ for i = omtConfiguration.OMTInd(2:end)
         columnStartVector(omtConfiguration.MaxOMTNum + 1 - temp);
 end
 
-% Calculate which rows correspond to each message
-for i = omtConfiguration.OMTInd
-    rowCells{i} = columnStartVector(i):columnStartVector(i) + omtConfiguration.OMTNumFrames - 1;
-end
-
 % Initialize Time
 t = 1; % Time counter (Units of TBA)
 
@@ -41,7 +37,6 @@ m = 0; % Message counter used for outputing which messages happened in what orde
 
 % Initialize broadcast matrix
 maxNumFrames = max(omtConfiguration.OMTNumFrames); % Find maximum number of frames for a specific OMT
-totalNumFrames = sum(omtConfiguration.OMTNumFrames); % Find the total number of Frames required for OTAR
 broadcastArray = zeros(configParameters.SimLength + maxNumFrames, 1, 'int16');  % The last addition of maxNumFrames is to give buffer just in case there is a run over of t over configParameters.SimLength
 broadcastMessageNum = zeros(configParameters.SimLength + maxNumFrames, 1, 'int16'); % Extra buffer, will be slimmed down eventually
 
@@ -98,7 +93,6 @@ end
 
 broadcastArray = broadcastArray(broadcastArray ~= 0);
 broadcastMessageNum = broadcastMessageNum(broadcastMessageNum ~= 0);
-
 
 end
 

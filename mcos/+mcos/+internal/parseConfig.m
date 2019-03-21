@@ -93,6 +93,14 @@ parser.addParameter('PERVector', 1)
 % validWeightsVectorFn = @(x) % TODO: Make validWeightsVectorFn
 parser.addParameter('WeightsVector', 1)
 
+% PartitionBlockSize
+validPartitionBlockSizeFn = @(x) (x > 0);
+parser.addParameter('PartitionBlockSize', 1000, validPartitionBlockSizeFn)
+
+% DisplayOn
+validDisplayOnFn = @(x) (islogical(x));
+parser.addParameter('DisplayOn', true, validDisplayOnFn)
+
 % PlottingParameters
 validPlottingParametersFn = @(x) isa(x, 'cell');
 parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)

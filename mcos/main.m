@@ -66,9 +66,7 @@ elseif (numWeights > 1) && (length(configParameters.PER) == 1)
 end
 
 %% Run Simulator
-for iteration = 1:configParameters.NumIterations
-    otarSimulator = mcos.OTARSim.OTARSimulator(configParameters, omtConfiguration, iteration);
-end
+otarSimulator = mcos.OTARSim.OTARSimulator(configParameters, omtConfiguration);
 
 %% Plot results
 

@@ -23,6 +23,8 @@ if nargin < 1 % Skip if plotData is being called
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
+    partitionBlockSize = 1000;  % Size of the partitions of the generated broadcast
+    displayOn = true;   % Display checkpoints and waitbars
     
     % TESLA parameters
     teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA keys
@@ -85,10 +87,16 @@ configParameters = mcos.ConfigParameters(...
     'TESLAMACLengthBits', teslaMACLengthBits,...
     'TESLASaltLengthBits', teslaSaltLengthBits,...
     'NumIterations', numIterations,...
+    'PartitionBlockSize', partitionBlockSize,...
+    'DisplayOn', displayOn,...
     'PlottingParameters', plottingParameters...
     );
 else
     configParameters = mcos.ConfigParameters('PlottingParameters', plottingParameters);
+end
+
+if configParameters.DisplayOn
+   disp('Configuring Parameters...') 
 end
 
 end

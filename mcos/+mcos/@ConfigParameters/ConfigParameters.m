@@ -82,6 +82,9 @@ classdef ConfigParameters < handle
         % TESLASaltLengthBits - Length of the salt used for each TESLA
         % keychain in bits
         TESLASaltLengthBits
+        
+        % DisplayOn - Show checkpoints and waitbars for the simulations
+        DisplayOn
 
     end
     
@@ -98,6 +101,11 @@ classdef ConfigParameters < handle
         % multiple Weights or over other vectors. So there needs to be a
         % vector of Weights.
         WeightsVector
+                
+        % PartitionBlockSize - Size of the block partitions when breaking
+        % up the code. This greatly speeds up the code. Set to empty if the
+        % broadcast should not be broken into blocks.
+        PartitionBlockSize
         
     end
     
@@ -141,6 +149,8 @@ classdef ConfigParameters < handle
             obj.NumIterations = res.NumIterations;
             obj.PERVector = res.PERVector;
             obj.WeightsVector = res.WeightsVector;
+            obj.PartitionBlockSize = res.PartitionBlockSize;
+            obj.DisplayOn = res.DisplayOn;
             obj.PlottingParameters = res.PlottingParameters;
             
             % Null TESLA parameters if ECDSA is used

@@ -3,10 +3,6 @@ classdef Broadcast
     % the input parameters from config.m.
     
     properties (SetAccess = protected)
-        % BroadcastArray - Array of OTAR messages (OMTs) that are in the
-        % order in which they are broadcast
-        BroadcastArray
-        
         % BroadcastMessageNum - OMT Message numbers that are broadcast
         BroadcastMessageNum
         
@@ -21,6 +17,12 @@ classdef Broadcast
         % Weights - Matrix of weights that are loaded from
         % WeightingSchemeFile
         Weights
+    end
+    
+    properties (SetAccess = public)
+        % BroadcastArray - Array of OTAR messages (OMTs) that are in the
+        % order in which they are broadcast
+        BroadcastArray
     end
     
     % Constructor
@@ -49,7 +51,6 @@ classdef Broadcast
     end
     
     methods (Static)
-        % TODO: Create a broadcast generator using Hameed's algorithm
         obj = generateBroadcast(configParameters, omtConfiguration, iteration);
     end
     

@@ -52,7 +52,9 @@ classdef OMTConfiguration < handle
         
         %Constructor
         function obj = OMTConfiguration(configParameters)
-            % TODO: Build a constructor for OMTConfiguration
+            if configParameters.DisplayOn
+               disp('Configuring OTAR Messages...') 
+            end
             
             % Handle empty constructor
             if nargin < 1
