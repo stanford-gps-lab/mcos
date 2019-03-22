@@ -16,6 +16,10 @@ if ~isempty(intersect(configParameters.PlottingParameters, omtConfiguration.OMTU
     plotGroupHistograms(configParameters, otarSimulator, dim)
 end
 
+% % Plot the results vs the loop parameter
+% if (configParameters.NumIterations > 1)
+%     plotLoopParameter(configParameters, otarSimulation)
+% end
 
 
 
@@ -67,3 +71,17 @@ end
 
 
 end
+
+% function plotLoopParameter(configParameters, otarSimulation)
+% % Plot results over looped parameters
+% 
+% % Useful variables
+% loopVar = eval(configParameters.LoopVarName);
+% 
+% figure
+% loglog()
+% 
+% 
+% 
+% 
+% end

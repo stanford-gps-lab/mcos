@@ -2,6 +2,9 @@ classdef ConfigParameters < handle
     % ConfigParameters - Class of configuration parameters set by the
     % config.m file.
     
+    % TODO: Make ConfigParameters not a handle and change how iterations
+    % are done in OTARSimulator
+    
     
     % Configuration parameters
     % Set to immutable so they cannot be changed once defined
