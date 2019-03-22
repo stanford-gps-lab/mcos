@@ -36,8 +36,8 @@ if nargin < 1 % Skip if plotData is being called
     plottingParameters = {...
         'Total';                                          % Plots time to get all information
         %         'OMT';                                            % Plots time to get all OMTs individually
-        'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
-        'Expiration of current keys';                     % Plots time to get expiration of current keys
+        %         'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
+        %         'Expiration of current keys';                     % Plots time to get expiration of current keys
         %         'Authenticated next level 2 key';                 % Plots time to get authenticated next level 2 key
         %         'Expiration of next keys';                        % Plots time to get expiration of next keys
         %         'All authenticated current level 2 keys';         % Plots time to get all authenticated current level 2 keys, only if NumDiffKeys > 1
@@ -84,10 +84,15 @@ loopVarInd = (cellfun(@max, varDouble(2,:)) > 1);
 if (sum(loopVarInd) + (numWeights > 1) - 1 > 0)
     error('Too many variables to loop through. Can only loop through one at a time.')
 end
+
+% Define numIterations and the name of the variable that is being looped
+% through
 if (sum(loopVarInd) == 1) && (numWeights == 1)
     numIterations = max(varDouble{2,loopVarInd});
+    loopVarName = varDouble{1, loopVarInd};
 elseif (sum(loopVarInd == 0)) && (numWeights > 1)
     numIterations = numWeights;
+    loopVarName = 'Weights';
 end
 
 %% Display Status
@@ -120,6 +125,7 @@ if nargin < 1
         'NumIterations', numIterations,...
         'PartitionBlockSize', partitionBlockSize,...
         'DisplayOn', displayOn,...
+        'LoopVarName', loopVarName,...
         'PlottingParameters', plottingParameters...
         );
 else

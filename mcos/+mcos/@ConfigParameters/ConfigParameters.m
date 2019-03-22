@@ -85,6 +85,9 @@ classdef ConfigParameters < handle
         
         % DisplayOn - Show checkpoints and waitbars for the simulations
         DisplayOn
+        
+        % LoopVarName - Name of the variable that is being looped.
+        LoopVarName
 
     end
     
@@ -151,6 +154,7 @@ classdef ConfigParameters < handle
             obj.WeightsVector = res.WeightsVector;
             obj.PartitionBlockSize = res.PartitionBlockSize;
             obj.DisplayOn = res.DisplayOn;
+            obj.LoopVarName = res.LoopVarName;
             obj.PlottingParameters = res.PlottingParameters;
             
             % Null TESLA parameters if ECDSA is used

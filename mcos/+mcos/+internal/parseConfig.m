@@ -101,6 +101,9 @@ parser.addParameter('PartitionBlockSize', 1000, validPartitionBlockSizeFn)
 validDisplayOnFn = @(x) (islogical(x));
 parser.addParameter('DisplayOn', true, validDisplayOnFn)
 
+% LoopVarName
+parser.addParameter('LoopVarName', [])
+
 % PlottingParameters
 validPlottingParametersFn = @(x) isa(x, 'cell');
 parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)
