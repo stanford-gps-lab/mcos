@@ -262,7 +262,7 @@ end
 % Calculate the average time for each message in seconds
 user_results.total.average_time = nanmean(nanmean(user_results.total.time));
 for i = message_fields
-    user_results.average_time_vec(i) =  nanmean(nanmean(user_results.time(i,:,:)));
+    user_results.average_time_vec(i) =  nanmean(nanmean(user_results.time(i,:,:))); % This might be a typo. Indexing might be (:,:,i) instead.
 end
 user_results.current_auth_PK_time.average_time = nanmean(nanmean(user_results.current_auth_PK_time.time));
 user_results.current_auth_exp_PK_time.average_time = nanmean(nanmean(user_results.current_auth_exp_PK_time.time));

@@ -27,6 +27,13 @@ classdef OTARSimulator < handle
         % message digest
         TotalNumUsers
         
+        % OMTTimeAverages - Average time to receive each OMT
+        OMTTimeAverages
+        
+        % GroupTimeAverages - Average time it to takes to receive each
+        % group of OMTs
+        GroupTimeAverages
+        
     end
     
     properties (Transient = true, Hidden = true)

@@ -23,6 +23,12 @@ groupTimeResults = getGroupTimeResults(omtConfiguration, timeResults);
 % digest
 totalNumUsers = getTotalNumUsers(obj, groupTimeResults);
 
+% Calculate the average time for each OMT
+omtTimeAverages = getOMTTimeAverages(omtConfiguration, timeResults);
+
+% Calculate the average time for each group of OMTs in seconds
+groupTimeAverages = getGroupTimeAverages(omtConfiguration, groupTimeResults);
+
 
 
 
@@ -33,6 +39,8 @@ totalNumUsers = getTotalNumUsers(obj, groupTimeResults);
 obj.TimeResults{iteration} = timeResults;
 obj.GroupTimeResults{iteration} = groupTimeResults;
 obj.TotalNumUsers{iteration} = totalNumUsers;
+obj.OMTTimeAverages{iteration} = omtTimeAverages;
+obj.GroupTimeAverages{iteration} = groupTimeAverages;
 
 end
 
@@ -58,6 +66,27 @@ totalInd = strcmp(omtUniqueGroups, 'Total');
 % Find the number of users that received a full message digest
 totalNumUsers = sum(~isnan(groupTimeResults{totalInd}));
 
+
+end
+
+function omtTimeAverages = getOMTTimeAverages(omtConfiguration, timeResults)
+
+omtTimeAverages = zeros(omtConfiguration.MaxOMTNum, 1);
+for i = omtConfiguration.OMTInd
+    omtTimeAverages(i) = nanmean(nanmean(timeResults(:,:,i)));
+end
+
+end
+
+function groupTimeAverages = getGroupTimeAverages(obj, groupTimeResults)
+% Useful variables
+omtUniqueGroups = obj.OMTUniqueGroups;
+
+% Calculate groupTimeAverages
+groupTimeAverages = cell(length(omtUniqueGroups),1);
+for i = 1:length(omtUniqueGroups)
+    groupTimeAverages{i} = nanmean(nanmean(groupTimeResults{i}));
+end
 
 end
 
