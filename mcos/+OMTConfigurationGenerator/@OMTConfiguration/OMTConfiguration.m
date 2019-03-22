@@ -13,6 +13,9 @@ classdef OMTConfiguration < handle
         % OMTDescription - Description of the OMT
         OMTDescription
         
+        % OMTGroups - OMT Groupings set for post-processing results
+        OMTGroupAssignments
+        
         % SBASAuthenticationMessage - The object that is either
         % SBASECDSAMessage or SBASTESLAMessage depending on the
         % configuration parameters.
@@ -45,6 +48,13 @@ classdef OMTConfiguration < handle
         
         % MaxOMTNum - Largest OMT Number for this simulation
         MaxOMTNum
+                
+        % OMTUniqueGroups - Set of unique groupings of OMT Messages
+        OMTUniqueGroups
+        
+        % PlottingGroups - Set of messages belonging to each element in
+        % OMTUniqueGroups
+        PlottingGroups
         
     end
     
@@ -77,6 +87,7 @@ classdef OMTConfiguration < handle
             obj.OMTNum = omtConfig(:,1);
             obj.OMTDataLengthBits = omtConfig(:,2);
             obj.OMTDescription = omtConfig(:,3);
+            obj.OMTGroupAssignments = omtConfig(:,4);
             
             % Calculate the OMTFullLength using the OTMConfiguration file
             % and this simulation's configParameters and the chosen
@@ -90,6 +101,10 @@ classdef OMTConfiguration < handle
             % Assign Properties from completeOMTConfiguration
             obj = obj.completeOMTConfiguration(configParameters);
             
+            % Organize groups of OMT messages to be used for
+            % post-processing
+            obj = obj.organizeOMTMessages();
+            
         end
         
     end
@@ -97,10 +112,8 @@ classdef OMTConfiguration < handle
     methods
         % Add methods here
         obj = completeOMTConfiguration(obj, configParameters)
-    end
-    
-    methods (Static)
-        % Add static methods here
+        
+        obj = organizeOMTMessages(obj)
     end
     
     

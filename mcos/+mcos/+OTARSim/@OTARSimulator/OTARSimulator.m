@@ -13,6 +13,16 @@ classdef OTARSimulator < handle
         % each simulation
         SubMessageResults
         
+        % TimeResults - The time it takes to receive each message is
+        % seconds
+        TimeResults
+        
+        % OMTUniqueGroups - Taken from OMTConfiguration
+        OMTUniqueGroups
+        
+        % GroupTimeResults - Time results for the different OMT Groups
+        GroupTimeResults
+        
     end
     
     properties (Transient = true, Hidden = true)

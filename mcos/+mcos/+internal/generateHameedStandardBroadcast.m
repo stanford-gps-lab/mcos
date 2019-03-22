@@ -1,4 +1,4 @@
-function [broadcastArray, broadcastMessageNum] = generateHameedStandardBroadcast(configParameters, omtConfiguration, iteration)
+function [broadcastArray, broadcastMessageNum, rowCells] = generateHameedStandardBroadcast(configParameters, omtConfiguration, iteration)
 % Generate broadcast array using algorithm from "Hameed - Efficient
 % algorithms for scheduling data broadcast"
 % Much of this is straight taken from the original code
@@ -27,6 +27,12 @@ for i = omtConfiguration.OMTInd(2:end)
     temp = find(flip(columnStartVector), 1);
     columnStartVector(i) = omtConfiguration.OMTNumFrames(omtConfiguration.MaxOMTNum + 1 - temp) + ...
         columnStartVector(omtConfiguration.MaxOMTNum + 1 - temp);
+end
+
+% Calculate which rows correspond to each message
+rowCells = cell(omtConfiguration.MaxOMTNum, 1);
+for i = omtConfiguration.OMTInd
+    rowCells{i} = columnStartVector(i):columnStartVector(i) +  omtConfiguration.OMTNumFrames(i) - 1;
 end
 
 % Initialize Time
@@ -83,8 +89,8 @@ while t < configParameters.SimLength
     bVec(cMinI) = cVec(cMinI);
     cVec(cMinI) = bVec(cMinI) + sVec(cMinI);
     for j = 1:omtConfiguration.OMTNumFrames(cMinI)
-       broadcastArray(t) = columnStartVector(cMinI) + j - 1;    % Broadcast array writes each sub message to be broadcast
-       t = t + 1;
+        broadcastArray(t) = columnStartVector(cMinI) + j - 1;    % Broadcast array writes each sub message to be broadcast
+        t = t + 1;
     end
     
     % Clear set S

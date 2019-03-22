@@ -25,6 +25,12 @@ classdef Broadcast
         BroadcastArray
     end
     
+    properties (Transient = true, Hidden = true)
+        % RowCells - Which rows in the broadcast matrix correspond to which
+        % OMT
+        RowCells
+    end
+    
     % Constructor
     methods
         
@@ -45,6 +51,7 @@ classdef Broadcast
             obj.Weights = temp.Weights;
             obj.BroadcastArray = temp.BroadcastArray;
             obj.BroadcastMessageNum = temp.BroadcastMessageNum;
+            obj.RowCells = temp.RowCells;
             
         end
         

@@ -35,7 +35,7 @@ if (strcmp(obj.Algorithm, 'Hameed-Standard'))
     % algorithms for scheduling data broadcast"
     
     % Generate BroadcastArray
-    [obj.BroadcastArray, obj.BroadcastMessageNum] = mcos.internal.generateHameedStandardBroadcast(configParameters, omtConfiguration, iteration);
+    [obj.BroadcastArray, obj.BroadcastMessageNum, obj.RowCells] = mcos.internal.generateHameedStandardBroadcast(configParameters, omtConfiguration, iteration);
     
 end
 
