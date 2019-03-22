@@ -15,7 +15,7 @@ classdef OTARSimulator < handle
         
         % TimeResults - The time it takes to receive each message is
         % seconds
-        TimeResults
+        OMTTimeResults
         
         % OMTUniqueGroups - Taken from OMTConfiguration
         OMTUniqueGroups
@@ -33,6 +33,30 @@ classdef OTARSimulator < handle
         % GroupTimeAverages - Average time it to takes to receive each
         % group of OMTs
         GroupTimeAverages
+        
+        % OMTTimeMax - Max time to receive each OMT
+        OMTTimeMax
+        
+        % OMTTimeMin - Min time to receive each OMT
+        OMTTimeMin
+        
+        % OMTTimeMode - Mode time to receive each OMT
+        OMTTimeMode
+        
+        % OMTTimeStDev - StDev time to receive each OMT
+        OMTTimeStDev
+        
+        % GroupTimeMax - Max time to receive each group of OMTs
+        GroupTimeMax
+        
+        % GroupTimeMin - Min time to receive each group of OMTs
+        GroupTimeMin
+        
+        % GroupTimeMode - Mode time to receive each group of OMTs
+        GroupTimeMode
+        
+        % GroupTimeStDev - StDev time to receive each group of OMTs
+        GroupTimeStDev
         
     end
     
