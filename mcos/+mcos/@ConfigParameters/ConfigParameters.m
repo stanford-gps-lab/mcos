@@ -109,7 +109,7 @@ classdef ConfigParameters < handle
         
     end
     
-    properties (Transient = true, Hidden = true)
+    properties (Transient = true)
         % PlottingParameters - cell array describing which plots are
         % desired when running this code
         PlottingParameters

@@ -21,6 +21,7 @@ catch ME
         error('Check inputs to config.m. May have a parser error.')
     end
     disp(ME.identifier) % Display error identifier for debug purposes
+    return;
 end
 
 %% Construct SBAS and OMT messages from OMTConfigurationFile stated in config.m
@@ -52,28 +53,19 @@ end
 
 % TODO: CLEAN UP HOW YOU DO LOOPS!
 
-
-% Change config parameters if there are multiple weight rows used
-% Throw error if size of PER is larger than one
-temp = mcos.BroadcastGenerator.Broadcast(configParameters, omtConfiguration, 1);
-[numWeights, ~] = size(temp.Weights);
-if (numWeights > 1) && (length(configParameters.PER) > 1)
-    error('Cannot loop through multiple PER AND Weights')
-elseif (numWeights > 1) && (length(configParameters.PER) == 1)
-    configParameters.WeightsVector = temp.Weights;
-    configParameters.PERVector = configParameters.PER*ones(numWeights, 1);
-    configParameters.NumIterations = numWeights;
-end
-
 %% Run Simulator
 otarSimulator = mcos.OTARSim.OTARSimulator(configParameters, omtConfiguration);
 
 %% Plot results
+mcos.internal.plotOTARResults(configParameters, omtConfiguration, otarSimulator);
 
 %% Save data (if requested)
 if configParameters.SaveData
     save('saveData')
 end
+
+% TODO: Make obj = fun(obj) into [] = fun(obj) like
+% calculateObservationData.m
 
 
 
