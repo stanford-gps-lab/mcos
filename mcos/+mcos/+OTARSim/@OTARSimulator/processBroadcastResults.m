@@ -12,11 +12,16 @@ rowCells = obj.OTARBroadcast{iteration}.RowCells;
 % From the subMessages, calculate the time it takes to receive each message
 % in seconds
 for i = omtConfiguration.OMTInd
+    % TODO: Preallocate timeResults
     timeResults(:,:,i) = max(subMessages(:,:,rowCells{i}), [], 3, 'includenan').*tba;
 end
 
 % Calculate group time results
 groupTimeResults = getGroupTimeResults(omtConfiguration, timeResults);
+
+% Calculate how many users were simulated that received a full message
+% digest
+totalNumUsers = getTotalNumUsers(obj, groupTimeResults);
 
 
 
@@ -26,8 +31,8 @@ groupTimeResults = getGroupTimeResults(omtConfiguration, timeResults);
 
 % Record results
 obj.TimeResults{iteration} = timeResults;
-obj.OMTUniqueGroups = omtConfiguration.OMTUniqueGroups;
 obj.GroupTimeResults{iteration} = groupTimeResults;
+obj.TotalNumUsers{iteration} = totalNumUsers;
 
 end
 
@@ -40,6 +45,19 @@ groupTimeResults = cell(length(omtUniqueGroups),1);
 for i = 1:length(omtUniqueGroups)
     groupTimeResults{i} = max(timeResults(:,:,omtConfiguration.PlottingGroups{i}), [], 3, 'includenan');
 end
+
+end
+
+function totalNumUsers = getTotalNumUsers(obj, groupTimeResults)
+% Useful variables
+omtUniqueGroups = obj.OMTUniqueGroups;
+
+% Find which group is total
+totalInd = strcmp(omtUniqueGroups, 'Total');
+
+% Find the number of users that received a full message digest
+totalNumUsers = sum(~isnan(groupTimeResults{totalInd}));
+
 
 end
 

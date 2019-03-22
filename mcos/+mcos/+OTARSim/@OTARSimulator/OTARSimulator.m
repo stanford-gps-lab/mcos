@@ -23,6 +23,10 @@ classdef OTARSimulator < handle
         % GroupTimeResults - Time results for the different OMT Groups
         GroupTimeResults
         
+        % TotalNumUsers - Total number of users that received a full
+        % message digest
+        TotalNumUsers
+        
     end
     
     properties (Transient = true, Hidden = true)
@@ -55,6 +59,8 @@ classdef OTARSimulator < handle
                 tWaitbar = waitbar(0, 'Iterating OTAR Simulations...'); % Initialize waitbar
                 
             end
+            
+            obj.OMTUniqueGroups = omtConfiguration.OMTUniqueGroups;
             
             % Loop through all iterations
             for iteration = 1:configParameters.NumIterations
