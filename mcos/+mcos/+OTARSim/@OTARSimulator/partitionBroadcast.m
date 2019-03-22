@@ -8,7 +8,7 @@ function obj = partitionBroadcast(obj, configParameters, omtConfiguration, itera
 % Useful variables
 totalNumMessages = sum(omtConfiguration.OMTNumFrames);
 broadcastArray = obj.OTARBroadcast{iteration}.BroadcastArray;
-per = configParameters.PERVector(iteration);
+per = configParameters.PER;
 
 % Set the blockSize
 blockFlag = 0;

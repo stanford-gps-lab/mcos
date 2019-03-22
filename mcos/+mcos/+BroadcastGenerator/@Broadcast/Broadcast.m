@@ -34,7 +34,7 @@ classdef Broadcast
     % Constructor
     methods
         
-        function obj = Broadcast(configParameters, omtConfiguration, iteration)
+        function obj = Broadcast(configParameters, omtConfiguration)
             
             % Handle empty constructor
             if nargin < 1
@@ -45,7 +45,7 @@ classdef Broadcast
             obj.Weights = 0;
             
             % Assign properties using generateBroadcast
-            temp = mcos.BroadcastGenerator.Broadcast.generateBroadcast(configParameters, omtConfiguration, iteration);
+            temp = mcos.BroadcastGenerator.Broadcast.generateBroadcast(configParameters, omtConfiguration);
             obj.Algorithm = temp.Algorithm;
             obj.WeightingSchemeFile = temp.WeightingSchemeFile;
             obj.Weights = temp.Weights;
@@ -58,7 +58,7 @@ classdef Broadcast
     end
     
     methods (Static)
-        obj = generateBroadcast(configParameters, omtConfiguration, iteration);
+        obj = generateBroadcast(configParameters, omtConfiguration);
     end
     
     

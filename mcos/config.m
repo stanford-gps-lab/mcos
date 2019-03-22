@@ -12,14 +12,14 @@ if nargin < 1 % Skip if plotData is being called
     frequency = 'L5';   % Frequency - 'L1' or 'L5'
     channel = 'Q';  % Channel - 'I' or 'Q'
     numDiffKeys = 1;    % NumDiffKeys - Number of different keys used to sign data. Nominally 1.
-    per = 0;    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
+    per = [0, 0.1, 0.2];    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
     minLengthOTARMessage = 0;   % MinLengthOTARMessage [messages] - minimum length that an OTAR message is. Nominally 0.
     tba = 6;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
-    simLength = 2000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
+    simLength = 1000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = 'Hameed-Standard-ECDSA-Test.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses. TODO: WeightingScheme to be defined.
+    weightingSchemeFile = 'Hameed-Standard-ECDSA-Single-Test.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses. TODO: WeightingScheme to be defined.
     omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
-    broadcastGenerator = [];    % BroadcastGenerator - Which function to call when generating OMT broadcast. TODO: Incorporate broadcastGenerator from config.m
+    broadcastGenerator = '';    % BroadcastGenerator - Which function to call when generating OMT broadcast. TODO: Incorporate broadcastGenerator from config.m
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
@@ -71,28 +71,40 @@ temp = load(weightingSchemeFile, 'weights');
 cd(currentDir)
 
 % Find how many different sets of weights are included in the
-% omtConfigurationFile
-[numWeights, ~] = size(temp.weights);
-clear temp
+% weightingSchemeFile
+weightingScheme = temp;
+weights = temp.weights;
+clear temp currentDir
 
-% Find all inputs that are doubles
+% Find all inputs that are doubles. Only variables that should be available
+% at this moment should be ones that are going to be in configParameters.
+loopVarName = '';
 varWhos = struct2cell(whos);
 varDouble = varWhos(:, strcmp(varWhos(4,:), 'double'));
 
+% Record the number of different weight sets. IT'S IMPORTANT THAT THIS
+% DOESN'T COME BEFORE varWhos.
+[numWeights, ~] = size(weights);
+
 % Find the double variable that is an array
 loopVarInd = (cellfun(@max, varDouble(2,:)) > 1);
-if (sum(loopVarInd) + (numWeights > 1) - 1 > 0)
+if (numWeights == 1)
+    loopVarInd(end) = false;
+end
+if (sum(loopVarInd) > 1)
     error('Too many variables to loop through. Can only loop through one at a time.')
 end
 
 % Define numIterations and the name of the variable that is being looped
 % through
-if (sum(loopVarInd) == 1) && (numWeights == 1)
+if (sum(loopVarInd) == 1)
     numIterations = max(varDouble{2,loopVarInd});
     loopVarName = varDouble{1, loopVarInd};
-elseif (sum(loopVarInd == 0)) && (numWeights > 1)
-    numIterations = numWeights;
-    loopVarName = 'Weights';
+    loopVarName = setLoopVarName(loopVarName);
+end
+if (strcmp(loopVarName, 'Weights')) && (numWeights == 1)
+    loopVarName = [];
+    numIterations = 1;
 end
 
 %% Display Status
@@ -126,12 +138,50 @@ if nargin < 1
         'PartitionBlockSize', partitionBlockSize,...
         'DisplayOn', displayOn,...
         'LoopVarName', loopVarName,...
+        'WeightingScheme', weightingScheme,...
+        'Weights', weights,...
         'PlottingParameters', plottingParameters...
         );
 else
     configParameters = mcos.ConfigParameters('PlottingParameters', plottingParameters);
 end
 
+
+end
+
+function outLoopVarName = setLoopVarName(inLoopVarName)
+switch inLoopVarName
+    case 'numDiffKeys'
+        outLoopVarName = 'NumDiffKeys';
+    case 'per'
+        outLoopVarName = 'PER';
+    case 'minLengthOTARMessage'
+        outLoopVarName = 'MinLengthOTARMessage';
+    case 'tba'
+        outLoopVarName = 'TBA';
+    case 'simLength'
+        outLoopVarName = 'SimLength';
+    case 'numUsers'
+        outLoopVarName = 'NumUsers';
+    case 'qChannelCRCBits'
+        outLoopVarName = 'QChannelCRCBits';
+    case 'level1PublicKeyLengthBits'
+        outLoopVarName = 'Level1PublicKeyLengthBits';
+    case 'level2PublicKeyLengthBits'
+        outLoopVarName = 'Level2PublicKeyLengthBits';
+    case 'teslaKeyLengthBits'
+        outLoopVarName = 'TESLAKeyLengthBits';
+    case 'teslaMACLengthBits'
+        outLoopVarName = 'TESLAMACLengthBits';
+    case 'teslaSaltLengthBits'
+        outLoopVarName = 'TESLASaltLengthBits';
+    case 'weights'
+        outLoopVarName = 'Weights';
+    case 'partitionBlockSize'
+        outLoopVarName = 'PartitionBlockSize';
+    otherwise
+        error('No match found for loopVarName')
+end
 
 end
 

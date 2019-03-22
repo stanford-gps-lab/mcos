@@ -1,4 +1,4 @@
-classdef ConfigParameters < handle
+classdef ConfigParameters
     % ConfigParameters - Class of configuration parameters set by the
     % config.m file.
     
@@ -21,6 +21,37 @@ classdef ConfigParameters < handle
         % Channel - 'I' or 'Q'
         Channel
         
+        % WeightingScheme - Denotes the function that will be used to
+        % weight the relative importance of each OTAR message or
+        % sub-message.
+        WeightingSchemeFile
+        
+        % MessageConfiguration - Grabs the message configuration used for
+        % this run. Allows the user to create an OTAR message configuration
+        % file to test its performance.
+        OMTConfigurationFile
+        
+        % BroadcastGenerator - Selects which function will be used to
+        % generate the broadcast.
+        BroadcastGenerator
+        
+        % DisplayOn - Show checkpoints and waitbars for the simulations
+        DisplayOn
+        
+        % NumIterations - Number of iterations if there are multiple
+        % simulations that need to be run
+        NumIterations
+        
+        % LoopVarName - Name of the variable that is being looped.
+        LoopVarName
+               
+        % WeightingScheme - WeightingScheme struct loaded from
+        % WeightingSchemeFile
+        WeightingScheme
+        
+    end
+    
+    properties (SetAccess = public)
         % NumDiffKeys - Number of different keys that are required to
         % authenticate messages. Ideally, there will only be one public key
         % to sign the data, but if there are multiple because each master
@@ -50,20 +81,6 @@ classdef ConfigParameters < handle
         % effect of PER for the same message sequence.
         NumUsers
         
-        % WeightingScheme - Denotes the function that will be used to
-        % weight the relative importance of each OTAR message or
-        % sub-message.
-        WeightingSchemeFile
-        
-        % MessageConfiguration - Grabs the message configuration used for
-        % this run. Allows the user to create an OTAR message configuration
-        % file to test its performance.
-        OMTConfigurationFile
-        
-        % BroadcastGenerator - Selects which function will be used to
-        % generate the broadcast.
-        BroadcastGenerator
-        
         % QChannelCRCBits - Number of bits reserved for CRC for each
         % signature frame
         QChannelCRCBits
@@ -86,28 +103,9 @@ classdef ConfigParameters < handle
         % keychain in bits
         TESLASaltLengthBits
         
-        % DisplayOn - Show checkpoints and waitbars for the simulations
-        DisplayOn
+        % Weights - Weights that are loaded from WeightingSchemeFile
+        Weights
         
-        % LoopVarName - Name of the variable that is being looped.
-        LoopVarName
-
-    end
-    
-    properties (SetAccess = public)         
-        % NumIterations - Number of iterations if there are multiple
-        % simulations that need to be run
-        NumIterations
-                
-        % PERVector - If there is a loop, that loop is either over multiple
-        % PERs or over other vectors. So there needs to be a vector of PER.
-        PERVector
-        
-        % WeightsVector - If there is a loop, that loop is either over
-        % multiple Weights or over other vectors. So there needs to be a
-        % vector of Weights.
-        WeightsVector
-                
         % PartitionBlockSize - Size of the block partitions when breaking
         % up the code. This greatly speeds up the code. Set to empty if the
         % broadcast should not be broken into blocks.
@@ -119,7 +117,7 @@ classdef ConfigParameters < handle
         % PlottingParameters - cell array describing which plots are
         % desired when running this code
         PlottingParameters
-
+        
     end
     
     % Constructor
@@ -128,9 +126,9 @@ classdef ConfigParameters < handle
         function obj = ConfigParameters(varargin)
             
             % handle an empty constructor
-            if nargin < 1
-                error('No configurations input.')
-            end
+%             if nargin < 1
+%                 error('No configurations input.')
+%             end
             
             % Parse inputs
             res = mcos.internal.parseConfig(varargin{:});
@@ -153,11 +151,11 @@ classdef ConfigParameters < handle
             obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;
             obj.Level2PublicKeyLengthBits = res.Level2PublicKeyLengthBits;
             obj.NumIterations = res.NumIterations;
-            obj.PERVector = res.PERVector;
-            obj.WeightsVector = res.WeightsVector;
             obj.PartitionBlockSize = res.PartitionBlockSize;
             obj.DisplayOn = res.DisplayOn;
             obj.LoopVarName = res.LoopVarName;
+            obj.WeightingScheme = res.WeightingScheme;
+            obj.Weights = res.Weights;
             obj.PlottingParameters = res.PlottingParameters;
             
             % Null TESLA parameters if ECDSA is used

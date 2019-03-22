@@ -61,18 +61,18 @@ classdef OTARSimulator < handle
     end
     
     properties (Transient = true, Hidden = true)
-       % BlockRowNum - number of blocks
-       BlockRowNum
-       
-       % BroadcastMatrix
-       BroadcastMatrix
-       
-       % TotalNumMessages
-       TotalNumMessages
-       
-       % BlockSize - size of the blocks
-       BlockSize
-       
+        % BlockRowNum - number of blocks
+        BlockRowNum
+        
+        % BroadcastMatrix
+        BroadcastMatrix
+        
+        % TotalNumMessages
+        TotalNumMessages
+        
+        % BlockSize - size of the blocks
+        BlockSize
+        
     end
     
     % Constructor
@@ -93,33 +93,45 @@ classdef OTARSimulator < handle
             
             obj.OMTUniqueGroups = omtConfiguration.OMTUniqueGroups;
             
+            % TODO: Change all places where weights are grabbed from
+            % omtConfiguration
+            
             % Loop through all iterations
             for iteration = 1:configParameters.NumIterations
                 
-                
-                % Place holder variables
+                % Iterate throug instances of configParameters
+                temp = eval('configParameters.LoopVarName');
+                tempConfigParameters = configParameters;
+                if ~isempty(temp)
+                    if (strcmp(temp, 'Weights'))
+                        tempConfigParameters.Weights = configParameters.Weights(iteration,:);
+                    else
+                        eval(['temp = configParameters.', configParameters.LoopVarName, ';'])
+                        eval(['tempConfigParameters.', configParameters.LoopVarName, ' = ', num2str(temp(iteration)), ';'])
+                    end                    
+                end
                 
                 % Generate Broadcast
-                obj.OTARBroadcast{iteration} = mcos.BroadcastGenerator.Broadcast(configParameters, omtConfiguration, iteration);
+                obj.OTARBroadcast{iteration} = mcos.BroadcastGenerator.Broadcast(tempConfigParameters, omtConfiguration);
                 
                 % Partition Broadcast
-                obj = obj.partitionBroadcast(configParameters, omtConfiguration, iteration);
+                obj = obj.partitionBroadcast(tempConfigParameters, omtConfiguration, iteration);
                 
                 % Simulate Broadcast
-                obj = obj.simulateBroadcast(configParameters, iteration);
+                obj = obj.simulateBroadcast(tempConfigParameters, iteration);
                 
                 % Process Broadcast Results
-                obj = obj.processBroadcastResults(configParameters, omtConfiguration, iteration);
+                obj = obj.processBroadcastResults(tempConfigParameters, omtConfiguration, iteration);
                 
                 % Iterate waitbar
                 if configParameters.DisplayOn
-                   waitbar(iteration/configParameters.NumIterations, tWaitbar,...
-                       ['Iteration ', num2str(iteration), ' of ', num2str(configParameters.NumIterations)]); 
+                    waitbar(iteration/configParameters.NumIterations, tWaitbar,...
+                        ['Iteration ', num2str(iteration), ' of ', num2str(configParameters.NumIterations)]);
                 end
             end
             
             if configParameters.DisplayOn
-               close(tWaitbar) % Close waitbar
+                close(tWaitbar) % Close waitbar
             end
             
         end

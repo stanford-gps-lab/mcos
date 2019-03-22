@@ -13,7 +13,7 @@ end
 blockRowNum = obj.BlockRowNum;
 broadcastMatrix = obj.BroadcastMatrix;
 numUsers = configParameters.NumUsers;
-per = configParameters.PERVector(iteration);
+per = configParameters.PER;
 totalNumMessages = obj.TotalNumMessages;
 blockSize = obj.BlockSize;
 

@@ -21,28 +21,22 @@ validChannelFn = @(x) (strcmp(x, 'I')) || (strcmp(x, 'Q'));
 parser.addParameter('Channel', validChannelFn)
 
 % NumDiffKeys
-validNumDiffKeysFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('NumDiffKeys', 1, validNumDiffKeysFn)
+parser.addParameter('NumDiffKeys', 1)
 
 % PER
-validPERFn = @(x) (min(x) >= 0) && (max(x) < 1);
-parser.addParameter('PER', 0, validPERFn)
+parser.addParameter('PER', 0)
 
 % MinLengthOTARMessage
-validMinLengthOTARMessageFn = @(x) (floor(x) == x) && (x >= 0);
-parser.addParameter('MinLengthOTARMessage', 0, validMinLengthOTARMessageFn)
+parser.addParameter('MinLengthOTARMessage', 0)
 
 % TBA
-validTBAFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('TBA', validTBAFn)
+parser.addParameter('TBA', [])
 
 % SimLength
-validSimLengthFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('SimLength', validSimLengthFn)
+parser.addParameter('SimLength', [])
 
 % NumUsers
-validNumUsersFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('NumUsers', 1, validNumUsersFn)
+parser.addParameter('NumUsers', 1)
 
 % WeightingSchemeFile
 validWeightingSchemeFileFn = @(x) (isempty(x)) || (strcmp(x(end-3:end), '.mat'));
@@ -58,40 +52,26 @@ parser.addParameter('OMTConfigurationFile', validOMTConfigurationFileFn)
 parser.addParameter('BroadcastGenerator', []) % TODO: Take away '[]' when you have created BroadcastGenerator
 
 % QChannelCRCBits
-validQChannelCRCBitsFn = @(x) (floor(x) == x) && (x >= 0);
-parser.addParameter('QChannelCRCBits', 0, validQChannelCRCBitsFn)
+parser.addParameter('QChannelCRCBits', 0)
 
 % Level1PublicKeyLengthBits
-validLevel1PublicKeyLengthBitsFn = @(x) (x == 224) || (x == 256) || (x == 384);
-parser.addParameter('Level1PublicKeyLengthBits', validLevel1PublicKeyLengthBitsFn)
+parser.addParameter('Level1PublicKeyLengthBits', [])
 
 % Level2PublicKeyLengthBits
-validLevel2PublicKeyLengthBitsFn = @(x) (x == 224) || (x == 256) || (x == 384);
-parser.addParameter('Level2PublicKeyLengthBits', validLevel2PublicKeyLengthBitsFn)
+parser.addParameter('Level2PublicKeyLengthBits', [])
 
 % TESLAKeyLengthBits
-validTESLAKeyLengthBitsFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('TESLAKeyLengthBits', validTESLAKeyLengthBitsFn)
+parser.addParameter('TESLAKeyLengthBits', [])
 
 % TESLAMACLengthBits
-validTESLAMACLengthBitsFn = @(x) (floor(x) == x) && (x > 0);
-parser.addParameter('TESLAMACLengthBits', validTESLAMACLengthBitsFn)
+parser.addParameter('TESLAMACLengthBits', [])
 
 % TESLASaltLengthBits
-validTESLASaltLengthBitsFn = @(x) (floor(x) == x) && (x >= 0);
-parser.addParameter('TESLASaltLengthBits', validTESLASaltLengthBitsFn)
+parser.addParameter('TESLASaltLengthBits', [])
 
 % NumIterations
 validNumIterationsFn = @(x) (floor(x) == x) && (x > 0);
 parser.addParameter('NumIterations', 1, validNumIterationsFn)
-
-% PERVector
-% validPERVectorFn = @(x) % TODO: Make validPERVectorFn
-parser.addParameter('PERVector', 1)
-
-% WeightsVector
-% validWeightsVectorFn = @(x) % TODO: Make validWeightsVectorFn
-parser.addParameter('WeightsVector', 1)
 
 % PartitionBlockSize
 validPartitionBlockSizeFn = @(x) (x > 0);
@@ -103,6 +83,12 @@ parser.addParameter('DisplayOn', true, validDisplayOnFn)
 
 % LoopVarName
 parser.addParameter('LoopVarName', [])
+
+% WeightingScheme
+parser.addParameter('WeightingScheme', [])
+
+% Weights
+parser.addParameter('Weights', [])
 
 % PlottingParameters
 validPlottingParametersFn = @(x) isa(x, 'cell');

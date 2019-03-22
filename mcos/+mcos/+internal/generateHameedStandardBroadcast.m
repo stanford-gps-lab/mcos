@@ -1,14 +1,14 @@
-function [broadcastArray, broadcastMessageNum, rowCells] = generateHameedStandardBroadcast(configParameters, omtConfiguration, iteration)
+function [broadcastArray, broadcastMessageNum, rowCells] = generateHameedStandardBroadcast(configParameters, omtConfiguration)
 % Generate broadcast array using algorithm from "Hameed - Efficient
 % algorithms for scheduling data broadcast"
 % Much of this is straight taken from the original code
 
 % Read Weights from WeightsVector
-weights = configParameters.WeightsVector(iteration, :);
+weights = configParameters.Weights;
 
 %% Generate data stream using Hameed algorithm
 % Generate eVec and sVec
-eVec = generateEVec(configParameters, omtConfiguration, iteration);
+eVec = generateEVec(configParameters, omtConfiguration);
 sVec = generateSVec(weights, omtConfiguration, eVec);
 
 % Initialize bVec
@@ -102,12 +102,12 @@ broadcastMessageNum = broadcastMessageNum(broadcastMessageNum ~= 0);
 
 end
 
-function eVec = generateEVec(configParameters, omtConfiguration, iteration)
+function eVec = generateEVec(configParameters, omtConfiguration)
 % Find the error probability for each OMT (item)
 
 eVec = zeros(omtConfiguration.MaxOMTNum, 1);
 for i = omtConfiguration.OMTInd
-    eVec(i) = 1 - (1 - configParameters.PERVector(iteration))^omtConfiguration.OMTNumFrames(i);
+    eVec(i) = 1 - (1 - configParameters.PER)^omtConfiguration.OMTNumFrames(i);
 end
 
 end
