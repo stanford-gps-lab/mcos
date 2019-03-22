@@ -11,6 +11,8 @@ rowCells = obj.OTARBroadcast{iteration}.RowCells;
 
 % From the subMessages, calculate the time it takes to receive each message
 % in seconds
+[temp, ~, ~] = size(subMessages);
+omtTimeResults = NaN(temp, configParameters.NumUsers, omtConfiguration.MaxOMTNum);
 for i = omtConfiguration.OMTInd
     % TODO: Preallocate timeResults
     omtTimeResults(:,:,i) = max(subMessages(:,:,rowCells{i}), [], 3, 'includenan').*tba;
@@ -34,9 +36,6 @@ groupTimeAverages = getGroupTimeAverages(omtConfiguration, groupTimeResults);
 
 % Calculate the rest of the statistics for each group of OMTs
 [groupTimeMax, groupTimeMin, groupTimeMode, groupTimeStDev] = getGroupStatistics(obj, groupTimeResults);
-
-
-
 
 % Record results
 obj.OMTTimeResults{iteration} = omtTimeResults;
@@ -140,9 +139,6 @@ for i = 1:length(omtUniqueGroups)
     groupTimeMode{i} = mode(temp);
     groupTimeStDev{i} = nanstd(temp);
 end
-
-
-
 
 end
 
