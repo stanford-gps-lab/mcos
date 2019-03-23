@@ -108,7 +108,7 @@ classdef OTARSimulator < handle
                     else
                         eval(['temp = configParameters.', configParameters.LoopVarName, ';'])
                         eval(['tempConfigParameters.', configParameters.LoopVarName, ' = ', num2str(temp(iteration)), ';'])
-                    end                    
+                    end
                 end
                 
                 % Generate Broadcast
