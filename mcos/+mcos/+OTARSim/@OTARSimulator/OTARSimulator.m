@@ -93,9 +93,6 @@ classdef OTARSimulator < handle
             
             obj.OMTUniqueGroups = omtConfiguration.OMTUniqueGroups;
             
-            % TODO: Change all places where weights are grabbed from
-            % omtConfiguration
-            
             % Loop through all iterations
             for iteration = 1:configParameters.NumIterations
                 

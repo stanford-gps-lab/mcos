@@ -46,11 +46,6 @@ parser.addParameter('WeightingSchemeFile', [], validWeightingSchemeFileFn)
 validOMTConfigurationFileFn = @(x) (strcmp(x(end-3:end), '.mat'));
 parser.addParameter('OMTConfigurationFile', validOMTConfigurationFileFn)
 
-% BroadcastGenerator
-% TODO: make a validBroadcastGeneratorFn when you have chosen how to do
-% BroadcastGenerator
-parser.addParameter('BroadcastGenerator', []) % TODO: Take away '[]' when you have created BroadcastGenerator
-
 % QChannelCRCBits
 parser.addParameter('QChannelCRCBits', 0)
 

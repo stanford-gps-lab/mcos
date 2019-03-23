@@ -1,10 +1,6 @@
 classdef ConfigParameters
     % ConfigParameters - Class of configuration parameters set by the
-    % config.m file.
-    
-    % TODO: Make ConfigParameters not a handle and change how iterations
-    % are done in OTARSimulator
-    
+    % config.m file.    
     
     % Configuration parameters
     % Set to immutable so they cannot be changed once defined
@@ -30,10 +26,6 @@ classdef ConfigParameters
         % this run. Allows the user to create an OTAR message configuration
         % file to test its performance.
         OMTConfigurationFile
-        
-        % BroadcastGenerator - Selects which function will be used to
-        % generate the broadcast.
-        BroadcastGenerator
         
         % DisplayOn - Show checkpoints and waitbars for the simulations
         DisplayOn
@@ -146,7 +138,6 @@ classdef ConfigParameters
             obj.NumUsers = res.NumUsers;
             obj.WeightingSchemeFile = res.WeightingSchemeFile;
             obj.OMTConfigurationFile = res.OMTConfigurationFile;
-            obj.BroadcastGenerator = res.BroadcastGenerator;
             obj.QChannelCRCBits = res.QChannelCRCBits;
             obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;
             obj.Level2PublicKeyLengthBits = res.Level2PublicKeyLengthBits;
