@@ -15,9 +15,9 @@ if nargin < 1 % Skip if plotData is being called
     per = 0;    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
     minLengthOTARMessage = 0;   % MinLengthOTARMessage [messages] - minimum length that an OTAR message is. Nominally 0.
     tba = 2;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
-    simLength = 5000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
+    simLength = 10000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = 'Hameed-Standard-ECDSA-Single-Test.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
+    weightingSchemeFile = 'Hameed-Semi-Rigid-ECDSA-Test.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
     omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
@@ -35,8 +35,8 @@ if nargin < 1 % Skip if plotData is being called
     plottingParameters = {...
         'Total';                                          % Plots time to get all information
         %         'OMT';                                            % Plots time to get all OMTs individually
-                'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
-%                 'Expiration of current keys';                     % Plots time to get expiration of current keys
+        'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
+        %                 'Expiration of current keys';                     % Plots time to get expiration of current keys
         %         'Authenticated next level 2 key';                 % Plots time to get authenticated next level 2 key
         %         'Expiration of next keys';                        % Plots time to get expiration of next keys
         %         'All authenticated current level 2 keys';         % Plots time to get all authenticated current level 2 keys, only if NumDiffKeys > 1

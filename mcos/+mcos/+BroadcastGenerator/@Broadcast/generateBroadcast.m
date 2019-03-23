@@ -20,13 +20,23 @@ cd(currentDir)
 obj.Algorithm = algorithm;
 
 % Generate BroadcastArray
-if (strcmp(obj.Algorithm, 'Hameed-Standard'))
-    % Generate broadcast array using algorithm from "Hameed - Efficient
-    % algorithms for scheduling data broadcast"
-    
-    % Generate BroadcastArray
-    [obj.BroadcastArray, obj.BroadcastMessageNum, obj.RowCells] = mcos.internal.generateHameedStandardBroadcast(configParameters, omtConfiguration);
-    
+switch algorithm
+    case 'Hameed-Standard'
+        % Generate broadcast array using algorithm from "Hameed - Efficient
+        % algorithms for scheduling data broadcast"
+        
+        % Generate BroadcastArray
+        [obj.BroadcastArray, obj.BroadcastMessageNum, obj.RowCells] = mcos.internal.generateHameedStandardBroadcast(configParameters, omtConfiguration);
+        
+    case 'Hameed-Semi-Rigid'
+        % Generate broadcast array using algorithm from "Hameed - Efficient
+        % algorithms for scheduling data broadcast". The messages deemed
+        % most important have a minimum time between broadcast to ensure
+        % that the these messages have a guarunteed broadcast rate.
+        [obj.BroadcastArray, obj.BroadcastMessageNum, obj.RowCells] = mcos.internal.generateHameedSemiRigidBroadcast(configParameters, omtConfiguration);
+        
+    otherwise
+        error('Not a valid algorithm')
 end
 
 end
