@@ -51,8 +51,6 @@ end
 % TODO: Write sanity check for the case where PER and weights take on
 % multiple values
 
-% TODO: CLEAN UP HOW YOU DO LOOPS!
-
 %% Run Simulator
 otarSimulator = mcos.OTARSim.OTARSimulator(configParameters, omtConfiguration);
 

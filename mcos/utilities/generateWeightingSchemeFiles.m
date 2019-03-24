@@ -4,17 +4,17 @@
 clear; close all; clc;
 
 %% Set filename
-filename = 'Hameed-Semi-Rigid-ECDSA-Test';
+filename = 'Hameed-Standard-ECDSA-1000';
 
 %% Set algorithm to be used
-% Options: Hameed-Standard, Hameed-Semi-Rigid
-algorithm = 'Hameed-Semi-Rigid';
+% Options: Hameed-Standard, Hameed-Semi-Rigid, Hameed-Split
+algorithm = 'Hameed-Standard';
 
 %% Set weights to be used
-% inputWeights = [1, 1];     % Input weights to be used.
-% weightAllocation = [{[1 2]}, {[3:8, 12:15]}];   % Allocate where the input weights will be distributed to. The number of cells must be equal to the number of columns of inputWeights.
-inputWeights = 1;
-weightAllocation = {[1:8, 12:15]}; 
+inputWeights = [1000, 1];     % Input weights to be used.
+weightAllocation = [{[1 2]}, {[3:8, 12:15]}];   % Allocate where the input weights will be distributed to. The number of cells must be equal to the number of columns of inputWeights.
+% inputWeights = 1;
+% weightAllocation = {[1:8, 12:15]}; 
 %% Normalize the weights
 weights = mcos.internal.normalizeWeights(inputWeights, weightAllocation);
 
@@ -35,3 +35,12 @@ cd +mcos/+BroadcastGenerator/weightingSchemeFiles
 save(filename)
 cd(currentDir)
 cd ..
+
+% TODO: Make normalizeWeights not an internal function
+
+
+
+
+
+
+
