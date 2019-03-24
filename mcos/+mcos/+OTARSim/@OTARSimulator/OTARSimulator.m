@@ -93,6 +93,8 @@ classdef OTARSimulator < handle
             
             obj.OMTUniqueGroups = omtConfiguration.OMTUniqueGroups;
             
+            % TODO: Loop through multiple weightingSchmeFiles
+            
             % Loop through all iterations
             for iteration = 1:configParameters.NumIterations
                 

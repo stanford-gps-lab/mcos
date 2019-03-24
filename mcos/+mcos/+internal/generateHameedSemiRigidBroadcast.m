@@ -3,6 +3,8 @@ function [broadcastArray, broadcastMessageNum, rowCells] = generateHameedSemiRig
 % algorithms for scheduling data broadcast"
 % Much of this is straight taken from the original code
 
+% TODO: Generalize Semi-Rigid to take multiple timeout limits
+
 % Load information from the WeightingSchemeFile
 currentDir = pwd;
 cd +mcos/+BroadcastGenerator/weightingSchemeFiles;

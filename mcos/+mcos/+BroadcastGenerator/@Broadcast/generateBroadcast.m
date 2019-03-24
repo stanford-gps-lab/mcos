@@ -35,6 +35,14 @@ switch algorithm
         % that the these messages have a guarunteed broadcast rate.
         [obj.BroadcastArray, obj.BroadcastMessageNum, obj.RowCells] = mcos.internal.generateHameedSemiRigidBroadcast(configParameters, omtConfiguration);
         
+    case 'Hameed-Split'
+        % Generate broadast array using algorithm from "Hameed - Efficient
+        % algorithms for scheduling data broadcast". In this case the
+        % messages are split into their submessages and delivered
+        % individually according to the algorithm where they do not
+        % necessarily need to be sent as one whole message at a time.
+        [obj.BroadcastArray, obj.BroadcastMessageNum, obj.RowCells] = mcos.internal.generateHameedSplitBroadcast(configParameters, omtConfiguration);
+        
     otherwise
         error('Not a valid algorithm')
 end

@@ -17,13 +17,13 @@ if nargin < 1 % Skip if plotData is being called
     tba = 2;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
     simLength = 10000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = 'Hameed-Semi-Rigid-ECDSA-Test.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
+    weightingSchemeFile = 'Hameed-Split-ECDSA-1000.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
     omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
     partitionBlockSize = 1000;  % PartitionBlockSize - Size of the partitions of the generated broadcast
-    displayOn = true;   % DisplayOn - Boolean. Display checkpoints and waitbars
+    displayOn = false;   % DisplayOn - Boolean. Display checkpoints and waitbars
     
     % TESLA parameters
     teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA keys
