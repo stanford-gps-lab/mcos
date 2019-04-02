@@ -103,9 +103,6 @@ classdef ConfigParameters
         % broadcast should not be broken into blocks.
         PartitionBlockSize
         
-    end
-    
-    properties (Transient = true)
         % PlottingParameters - cell array describing which plots are
         % desired when running this code
         PlottingParameters
