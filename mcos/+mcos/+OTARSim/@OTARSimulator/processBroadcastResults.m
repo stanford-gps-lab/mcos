@@ -14,7 +14,6 @@ rowCells = obj.OTARBroadcast{iteration}.RowCells;
 [temp, ~, ~] = size(subMessages);
 omtTimeResults = NaN(temp, configParameters.NumUsers, omtConfiguration.MaxOMTNum);
 for i = omtConfiguration.OMTInd
-    % TODO: Preallocate timeResults
     omtTimeResults(:,:,i) = max(subMessages(:,:,rowCells{i}), [], 3, 'includenan').*tba;
 end
 

@@ -19,13 +19,13 @@ if nargin < 1 % Skip if plotData is being called
     % TODO: Make an option to input minimum number of full message digests
     % received
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = 'Hameed-Split-ECDSA-1000.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
+    weightingSchemeFile = 'Hameed-Standard-ECDSA-1-10e4-100.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
     omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
     partitionBlockSize = 1000;  % PartitionBlockSize - Size of the partitions of the generated broadcast
-    displayOn = false;   % DisplayOn - Boolean. Display checkpoints and waitbars
+    displayOn = true;   % DisplayOn - Boolean. Display checkpoints and waitbars
     
     % TESLA parameters
     teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA keys
