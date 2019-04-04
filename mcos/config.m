@@ -7,20 +7,20 @@ function configParameters = config(plotStr)
 
 if nargin < 1 % Skip if plotData is being called
     % Simulation Parameters
-    scheme = 'ECDSA'; % Scheme - 'TESLA' or 'ECDSA'
+    scheme = 'TESLA'; % Scheme - 'TESLA' or 'ECDSA'
     saveData = true;   % SaveData - true or false
     frequency = 'L5';   % Frequency - 'L1' or 'L5'
-    channel = 'Q';  % Channel - 'I' or 'Q'
+    channel = 'I';  % Channel - 'I' or 'Q'
     numDiffKeys = 1;    % NumDiffKeys - Number of different keys used to sign data. Nominally 1.
     per = 0;    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
     minLengthOTARMessage = 0;   % MinLengthOTARMessage [messages] - minimum length that an OTAR message is. Nominally 0.
-    tba = 2;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
+    tba = 6;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
     simLength = 10000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     % TODO: Make an option to input minimum number of full message digests
     % received
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = 'Hameed-Standard-ECDSA-1-10e4-100.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
-    omtConfigurationFile = 'ECDSA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
+    weightingSchemeFile = 'Hameed-Standard-TESLA-100.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
+    omtConfigurationFile = 'TESLA_RevA.mat';  % MessageConfiguration - File containing message configuration information.
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
@@ -35,10 +35,10 @@ if nargin < 1 % Skip if plotData is being called
     
     % Plotting parameters
     plottingParameters = {...
-        'Total';                                          % Plots time to get all information
+                'Total';                                          % Plots time to get all information
         %         'OMT';                                            % Plots time to get all OMTs individually
-        'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
-        %                 'Expiration of current keys';                     % Plots time to get expiration of current keys
+                'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
+        %         'Expiration of current keys';                     % Plots time to get expiration of current keys
         %         'Authenticated next level 2 key';                 % Plots time to get authenticated next level 2 key
         %         'Expiration of next keys';                        % Plots time to get expiration of next keys
         %         'All authenticated current level 2 keys';         % Plots time to get all authenticated current level 2 keys, only if NumDiffKeys > 1
@@ -53,8 +53,8 @@ if nargin < 1 % Skip if plotData is being called
         %         'Bandwidth percentages'                           % Plots relative time taken by each message
         %
         %         %% TESLA Only %%%
-        %         'Authenticated current TESLA keychain and salt';       % Plot time to get authenticated TESLA key and salt
-        %         'Authenticated next TESLA keychain and salt';          % Plot time to get authenticated next TESLA key and salt
+                'Authenticated current TESLA keychain and salt';  % Plot time to get authenticated TESLA key and salt
+        %         'Authenticated next TESLA keychain and salt';     % Plot time to get authenticated next TESLA key and salt
         %         'All authenticated current TESLA keys and salt';  % Plot time to get all authenticated current TESLA keys and salt, only if NumDiffKeys > 1
         %         'All authenticated next TESLA keys and salt';     % Plot time to get all authenticated next TESLA keys and salt, only if NumDiffKeys > 1
         };
