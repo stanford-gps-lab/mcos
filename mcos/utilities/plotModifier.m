@@ -15,18 +15,18 @@ legend('AutoUpdate', 'off')
 line(xlim, [5*60 5*60], 'LineStyle', '-.', 'Color', 'k', 'LineWidth', 2)
 
 %% Change Title
-title('ECDSA PFQ-Semi-Rigid Authenticated current level 2 key')
+title('ECDSA Authenticated current level 2 key')
 
 %% Change ylim
-ylim([0 .7])
+ylim([0 .08])
 
 %% Change xlim
-xlim([20 80])
+xlim([600 2400])
 
 %% Change x axis title
 xlabel('Page Error Rate (PER)')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Save plot as a png
-filename = 'ECDSA PFQ-Semi-Rigid Level 2 Results';
+filename = 'ECDSA Standard Level 2 Results';
 print(filename, '-dpng', '-r300')
