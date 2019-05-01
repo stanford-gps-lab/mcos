@@ -35,6 +35,7 @@ cd(currentDir)
 cd ..
 
 % TODO: Make normalizeWeights not an internal function
+% TODO: Change name from Hameed to PFQ
 
 
 
