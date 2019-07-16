@@ -3,7 +3,7 @@
 % referenced. It is advised to run each section at a time as needed.
 
 %% Plot from loaded file
-filename = 'ECDSA-Split';
+filename = 'TESLA-keychain-12s';
 load(filename);
 
 %% Plot origin results
@@ -15,18 +15,18 @@ legend('AutoUpdate', 'off')
 line(xlim, [5*60 5*60], 'LineStyle', '-.', 'Color', 'k', 'LineWidth', 2)
 
 %% Change Title
-title('ECDSA Authenticated current level 2 key')
+title('TESLA Authenticated current level 2 key')
 
 %% Change ylim
 ylim([0 .08])
 
 %% Change xlim
-xlim([600 2400])
+xlim([6000 14000])
 
 %% Change x axis title
 xlabel('Page Error Rate (PER)')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Save plot as a png
-filename = 'ECDSA Standard Level 2 Results';
+filename = 'TESLA-level2-12s';
 print(filename, '-dpng', '-r300')
