@@ -16,48 +16,58 @@ clear; close all; clc;
 % Notes: - For fields that have no defined bit structure yet, leave 2nd
 %          column as []
 
-%% ECDSA_RevB %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TESLA_RevC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OMTConfiguration Filename
-filename = 'ECDSA_RevC';
+filename = 'TESLA_RevC';
 
+teslaKeyLengthBits = 115;
+teslaSaltLengthBits = 30;
 level2PublicKeyLengthBits = 224;
 level1PublicKeyLengthBits = 384;
+encryptionKeyLengthBits = 256;
 
 % Define first three columns
 omtConfig = {...
-    1, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA current level-2 public key w/ level-1 signature';...
-    2, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA next level 2 public key w/ level-1 signature';...
-    3, 34*2 + level1PublicKeyLengthBits*2, 'Expiration time of current level-2 public key and level-1 public key, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x2 for both levels of keys. w/ level-1 signature';...
-    4, 34*2 + level1PublicKeyLengthBits*2, 'Expiration time of next level-2 public key and level-1 public key, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x2 for both levels of keys. w/ level-1 signature';...
-    5, level1PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'Reserved';...
+    1, teslaKeyLengthBits + teslaSaltLengthBits + level2PublicKeyLengthBits*2, 'TESLA current keychain root/intermediate key, salt, and level 2 signature';...
+    2, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA current level 2 public key with ECDSA level 1 signature';...
+    3, 34*3 + level1PublicKeyLengthBits*2, 'Expiration time of current level 1 and level 2 public key and TESLA keychain, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x3 for all keys. With ECDSA level 1 signature';...
+    4, teslaKeyLengthBits + teslaSaltLengthBits + level2PublicKeyLengthBits*2, 'TESLA next keychain root/intermediate key, salt, and level 2 signature';...
+    5, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA next level 2 public key with ECDSA level 1 signature';...
+    6, 34*3 + level1PublicKeyLengthBits*2, 'Expiration time of next level 1 and level 2 public key and TESLA keychain, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x3 for all keys. With ECDSA level 1 signature';...
+    7, 0, 'Reserved';...
+    8, encryptionKeyLengthBits, 'Encryption key to unlock current level-1 public key';...
+    9, encryptionKeyLengthBits, 'Encryption key to unlock next level-1 public key';...
     10, 0, 'Reserved';...
     11, 0, 'Reserved';...
-    12, level1PublicKeyLengthBits + 1, 'ECDSA level 1 current public key';...
-    13, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 12, self-signed public key';...
-    14, level1PublicKeyLengthBits + 1, 'ECDSA level 1 next public key';...
-    15, level1PublicKeyLengthBits*2, 'ECDSA level 1 signature of OMT 14';...
+    12, 0, 'Reserved';...
+    13, 0, 'Reserved';...
+    14, 0, 'Reserved';...
+    15, 0, 'Reserved';...
     };
 
 % Define final column for message groupings
+%
+% Note: MESSAGE GROUPS MUST HAVE THE SAME NAME AS THOSE IN 
+% PlottingParameters in config.m
 omtConfig = [omtConfig,...
-    {{'Total', 'Authenticated current level 2 key'};... % 1
+    {{'Total', 'Authenticated current TESLA keychain and salt'};... % 1
     {'Total', 'Authenticated current level 2 key'};... % 2
     {'Total', 'Expiration of current keys'};... % 3
-    {'Total', 'Expiration of current keys'};... % 4
+    {'Total', 'Authenticated next TESLA keychain and salt'};... % 4
     {'Total', 'Authenticated next level 2 key'};... % 5
-    {'Total', 'Authenticated next level 2 key'};... % 6
-    {'Total', 'Expiration of next keys'};... % 7
-    {'Total', 'Expiration of next keys'};... % 8
-    {};... % 9
+    {'Total', 'Expiration of next keys'};... % 6
+    {};... % 7
+    {'Total', 'Authenticated current level 1 key'};... % 8
+    {'Total', 'Authenticated next level 1 key'};... % 9
     {};... % 10
     {};... % 11
-    {'Total', 'Authenticated current level 1 key'};... % 12
-    {'Total', 'Authenticated current level 1 key'};... % 13
-    {'Total', 'Authenticated next level 1 key'};... % 14
-    {'Total', 'Authenticated next level 1 key'}... % 15
+    {};... % 12
+    {};... % 13
+    {};... % 14
+    {};... % 15
     }];
 
-notes = 'Added extra bit to public key length to take away ambiguity of y-value';
+notes = 'Concatenated keys and sigs and switched to encryption for level 1';
 
 %% Complete sanity check on input values
 % Check to make sure that OMTNum are valid and non-repeated
@@ -340,6 +350,45 @@ cd ..
 %     }];
 % 
 % notes = 'Added extra bit to public key length to take away ambiguity of y-value';
+
+%% ECDSA_RevC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % OMTConfiguration Filename
+% filename = 'ECDSA_RevC';
+% 
+% level2PublicKeyLengthBits = 224;
+% level1PublicKeyLengthBits = 384;
+% encryptionKeyLengthBits = 256;
+% 
+% % Define first three columns
+% omtConfig = {...
+%     1, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA current level-2 public key w/ level-1 signature';...
+%     2, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA next level 2 public key w/ level-1 signature';...
+%     3, 34*2 + level1PublicKeyLengthBits*2, 'Expiration time of current level-2 public key and level-1 public key, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x2 for both levels of keys. w/ level-1 signature';...
+%     4, 34*2 + level1PublicKeyLengthBits*2, 'Expiration time of next level-2 public key and level-1 public key, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x2 for both levels of keys. w/ level-1 signature';...
+%     5, encryptionKeyLengthBits, 'Encryption keys to unlock current level-1 public keys';...
+%     6, encryptionKeyLengthBits, 'Encryption keys to unlock next level-1 public keys';...
+%     7, 0, 'Reserved';...
+%     };
+% 
+% % Define final column for message groupings
+% omtConfig = [omtConfig,...
+%     {{'Total', 'Authenticated current level 2 key'};... % 1
+%     {'Total', 'Authenticated next level 2 key'};... % 2
+%     {'Total', 'Expiration of current keys'};... % 3
+%     {'Total', 'Expiration of next keys'};... % 4
+%     {'Total', 'Authenticated current level 1 key'};... % 5
+%     {'Total', 'Authenticated next level 1 key'};... % 6
+%     {};... %7
+%     }];
+% 
+% notes = 'Concatenated keys and sigs and switched to encryption for level 1';
+
+
+
+
+
+
+
 
 
 
