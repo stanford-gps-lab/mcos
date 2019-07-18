@@ -383,6 +383,59 @@ cd ..
 % 
 % notes = 'Concatenated keys and sigs and switched to encryption for level 1';
 
+%% TESLA_RevC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % OMTConfiguration Filename
+% filename = 'TESLA_RevC';
+% 
+% teslaKeyLengthBits = 115;
+% teslaSaltLengthBits = 30;
+% level2PublicKeyLengthBits = 224;
+% level1PublicKeyLengthBits = 384;
+% encryptionKeyLengthBits = 256;
+% 
+% % Define first three columns
+% omtConfig = {...
+%     1, teslaKeyLengthBits + teslaSaltLengthBits + level2PublicKeyLengthBits*2, 'TESLA current keychain root/intermediate key, salt, and level 2 signature';...
+%     2, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA current level 2 public key with ECDSA level 1 signature';...
+%     3, 34*3 + level1PublicKeyLengthBits*2, 'Expiration time of current level 1 and level 2 public key and TESLA keychain, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x3 for all keys. With ECDSA level 1 signature';...
+%     4, teslaKeyLengthBits + teslaSaltLengthBits + level2PublicKeyLengthBits*2, 'TESLA next keychain root/intermediate key, salt, and level 2 signature';...
+%     5, level2PublicKeyLengthBits + 1 + level1PublicKeyLengthBits*2, 'ECDSA next level 2 public key with ECDSA level 1 signature';...
+%     6, 34*3 + level1PublicKeyLengthBits*2, 'Expiration time of next level 1 and level 2 public key and TESLA keychain, 34 = 20 TOW + 10 GPS WN + 4 Rollover. x3 for all keys. With ECDSA level 1 signature';...
+%     7, 0, 'Reserved';...
+%     8, encryptionKeyLengthBits, 'Encryption key to unlock current level-1 public key';...
+%     9, encryptionKeyLengthBits, 'Encryption key to unlock next level-1 public key';...
+%     10, 0, 'Reserved';...
+%     11, 0, 'Reserved';...
+%     12, 0, 'Reserved';...
+%     13, 0, 'Reserved';...
+%     14, 0, 'Reserved';...
+%     15, 0, 'Reserved';...
+%     };
+% 
+% % Define final column for message groupings
+% %
+% % Note: MESSAGE GROUPS MUST HAVE THE SAME NAME AS THOSE IN 
+% % PlottingParameters in config.m
+% omtConfig = [omtConfig,...
+%     {{'Total', 'Authenticated current TESLA keychain and salt'};... % 1
+%     {'Total', 'Authenticated current level 2 key'};... % 2
+%     {'Total', 'Expiration of current keys'};... % 3
+%     {'Total', 'Authenticated next TESLA keychain and salt'};... % 4
+%     {'Total', 'Authenticated next level 2 key'};... % 5
+%     {'Total', 'Expiration of next keys'};... % 6
+%     {};... % 7
+%     {'Total', 'Authenticated current level 1 key'};... % 8
+%     {'Total', 'Authenticated next level 1 key'};... % 9
+%     {};... % 10
+%     {};... % 11
+%     {};... % 12
+%     {};... % 13
+%     {};... % 14
+%     {};... % 15
+%     }];
+% 
+% notes = 'Concatenated keys and sigs and switched to encryption for level 1';
+
 
 
 

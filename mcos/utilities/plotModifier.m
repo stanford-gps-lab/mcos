@@ -3,7 +3,7 @@
 % referenced. It is advised to run each section at a time as needed.
 
 %% Plot from loaded file
-filename = 'TESLA-keychain-12s';
+filename = 'ECDSA-authlevel2-example';
 load(filename);
 
 %% Plot origin results
@@ -15,18 +15,32 @@ legend('AutoUpdate', 'off')
 line(xlim, [5*60 5*60], 'LineStyle', '-.', 'Color', 'k', 'LineWidth', 2)
 
 %% Change Title
-title('TESLA Authenticated current level 2 key')
+title('TESLA impact of WER on OMT reception')
+
+%% Change legend sensitivity plots
+% fig = gcf;
+% axObjs = fig.Children;
+% dataObjs = axObjs.Children;
+legend([dataObjs(4), dataObjs(8), dataObjs(12)], 'Authenticated current TESLA keychain and salt', 'Authenticated current level-2 key', 'All messages')
+% legend('Location', 'northwest')
 
 %% Change ylim
 ylim([0 .08])
 
+%% Change y ticks and labels
+yticks([60, 5*60, 10*60, 30*60, 60*60])
+yticklabels({'1 minute', '5 minutes', '10 minutes', '30 minutes', '1 hour'})
+
 %% Change xlim
-xlim([6000 14000])
+xlim([200 2200])
+
+%% Change y axis title
+ylabel('Time to receive set of messages')
 
 %% Change x axis title
-xlabel('Page Error Rate (PER)')
+xlabel('Word Error Rate (WER)')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Save plot as a png
-filename = 'TESLA-level2-12s';
+filename = 'TESLA-WER-Sensitivity';
 print(filename, '-dpng', '-r300')
