@@ -7,23 +7,26 @@ function configParameters = config(plotStr)
 
 if nargin < 1 % Skip if plotData is being called
     % Simulation Parameters
-    scheme = 'ECDSA'; % Scheme - 'TESLA' or 'ECDSA'
+    scheme = 'TESLA'; % Scheme - 'TESLA' or 'ECDSA'
     saveData = true;   % SaveData - true or false
     frequency = 'L5';   % Frequency - 'L1' or 'L5'
-    channel = 'Q';  % Channel - 'I' or 'Q'
+    channel = 'I';  % Channel - 'I' or 'Q'
     numDiffKeys = 1;    % NumDiffKeys - Number of different keys used to sign data. Nominally 1.
+    messageAuthenticationLength = false;    % messageAuthenticationLength - Boolean. Include number of messages authenticated or not in authentication message.
     per = 0;    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
     minLengthOTARMessage = 0;   % MinLengthOTARMessage [messages] - minimum length that an OTAR message is. Nominally 0.
-    tba = 2;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
+    tba = 12;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
     simLength = 10000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
     % TODO: Make an option to input minimum number of full message digests
     % received
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
-    weightingSchemeFile = 'Hameed-Semi-Rigid-ECDSA-RevC-100.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
-    omtConfigurationFile = 'ECDSA_RevC.mat';  % MessageConfiguration - File containing message configuration information.
+    weightingSchemeFile = 'Hameed-Standard-TESLA-RevC-100.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
+    omtConfigurationFile = 'TESLA_RevC.mat';  % MessageConfiguration - File containing message configuration information.
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384 + 1;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224 + 1;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
+    level1SignatureLengthBits = 384*2;  % Level1SignatureLengthBits - Length of the level-1 signature in bits
+    level2SignatureLengthBits = 224*2;  % Level2SignatureLengthBits - Length of the level-2 siganture in bits
     partitionBlockSize = 1000;  % PartitionBlockSize - Size of the partitions of the generated broadcast
     displayOn = true;   % DisplayOn - Boolean. Display checkpoints and waitbars
     
@@ -31,7 +34,6 @@ if nargin < 1 % Skip if plotData is being called
     teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA keys
     teslaMACLengthBits = 30;    % TESLAMACLengthBits [bits] - Length of the TESLA MAC
     teslaSaltLengthBits = 30;   % TESLASaltLengthBits [bits] - Length of the TESLA salt
-    
     
     % Plotting parameters
     plottingParameters = {...
@@ -121,6 +123,7 @@ if nargin < 1
         'Frequency', frequency,...
         'Channel', channel,...
         'NumDiffKeys', numDiffKeys,...
+        'MessageAuthenticationLength', messageAuthenticationLength,...
         'PER', per,...
         'MinLengthOTARMessage', minLengthOTARMessage,...
         'TBA', tba,...
@@ -131,6 +134,8 @@ if nargin < 1
         'QChannelCRCBits', qChannelCRCBits,...
         'Level1PublicKeyLengthBits', level1PublicKeyLengthBits,...
         'Level2PublicKeyLengthBits', level2PublicKeyLengthBits,...
+        'Level1SignatureLengthBits', level1SignatureLengthBits,...
+        'Level2SignatureLengthBits', level2SignatureLengthBits,...
         'TESLAKeyLengthBits', teslaKeyLengthBits,...
         'TESLAMACLengthBits', teslaMACLengthBits,...
         'TESLASaltLengthBits', teslaSaltLengthBits,...

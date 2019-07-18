@@ -51,6 +51,10 @@ classdef ConfigParameters
         % original code.
         NumDiffKeys
         
+        % MessageAuthenticationLength - Include binary count of how many
+        % data messages each authentication message authenticates.
+        MessageAuthenticationLength
+        
         % PER - Page error rate
         PER
         
@@ -84,6 +88,14 @@ classdef ConfigParameters
         % Level2PublicKeyLengthBits - Number of bits used for the level 2
         % public key
         Level2PublicKeyLengthBits
+        
+        % Level1SignatureLengthBits - Number of bits used for the level-1
+        % signature
+        Level1SignatureLengthBits
+        
+        % Level2SignatureLengthBits - Number of bits used for the level-2
+        % signature
+        Level2SignatureLengthBits
         
         % TESLAKeyLengthBits - Number of bits used for the TESLA key
         TESLAKeyLengthBits
@@ -128,6 +140,7 @@ classdef ConfigParameters
             obj.Frequency = res.Frequency;
             obj.Channel = res.Channel;
             obj.NumDiffKeys = res.NumDiffKeys;
+            obj.MessageAuthenticationLength = res.MessageAuthenticationLength;
             obj.PER = res.PER;
             obj.MinLengthOTARMessage = res.MinLengthOTARMessage;
             obj.TBA = res.TBA;
@@ -138,6 +151,8 @@ classdef ConfigParameters
             obj.QChannelCRCBits = res.QChannelCRCBits;
             obj.Level1PublicKeyLengthBits = res.Level1PublicKeyLengthBits;
             obj.Level2PublicKeyLengthBits = res.Level2PublicKeyLengthBits;
+            obj.Level1SignatureLengthBits = res.Level1SignatureLengthBits;
+            obj.Level2SignatureLengthBits = res.Level2SignatureLengthBits;
             obj.NumIterations = res.NumIterations;
             obj.PartitionBlockSize = res.PartitionBlockSize;
             obj.DisplayOn = res.DisplayOn;

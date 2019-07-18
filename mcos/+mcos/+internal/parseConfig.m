@@ -23,6 +23,9 @@ parser.addParameter('Channel', validChannelFn)
 % NumDiffKeys
 parser.addParameter('NumDiffKeys', 1)
 
+% MessageAuthenticationLength
+parser.addParameter('MessageAuthenticationLength', false);
+
 % PER
 parser.addParameter('PER', 0)
 
@@ -54,6 +57,12 @@ parser.addParameter('Level1PublicKeyLengthBits', [])
 
 % Level2PublicKeyLengthBits
 parser.addParameter('Level2PublicKeyLengthBits', [])
+
+% Level1SignatureLengthBits
+parser.addParameter('Level1SignatureLengthBits', [])
+
+% Level2SignatureLengthBits
+parser.addParameter('Level2SignatureLengthBits', [])
 
 % TESLAKeyLengthBits
 parser.addParameter('TESLAKeyLengthBits', [])

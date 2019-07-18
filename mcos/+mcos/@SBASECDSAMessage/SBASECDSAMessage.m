@@ -36,12 +36,12 @@ classdef SBASECDSAMessage < mcos.SBASMessage
             obj@mcos.SBASMessage(configParameters);
             
             % Assign ECDSASignatureLengthBits
-            obj.ECDSASignatureLengthBits = configParameters.Level2PublicKeyLengthBits*2;
+            obj.ECDSASignatureLengthBits = configParameters.Level2SignatureLengthBits;
             
             % Preemptively assign certain properties to 0
             obj.NumMessagesAuthenticationLengthBits = 0;
             
-            if (strcmp(configParameters.Channel, 'I'))
+            if (strcmp(configParameters.Channel, 'I')) && configParameters.MessageAuthenticationLength
                 % NumMessagesAuthenticationLengthBits
                 obj.NumMessagesAuthenticationLengthBits = ceil(log2(configParameters.TBA));
             end
