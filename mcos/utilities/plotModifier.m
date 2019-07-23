@@ -15,14 +15,15 @@ legend('AutoUpdate', 'off')
 line(xlim, [5*60 5*60], 'LineStyle', '-.', 'Color', 'k', 'LineWidth', 2)
 
 %% Change Title
-title('TESLA impact of WER on OMT reception')
+title('ECDSA impact of WER on OMT reception')
 
 %% Change legend sensitivity plots
 % fig = gcf;
 % axObjs = fig.Children;
 % dataObjs = axObjs.Children;
-legend([dataObjs(4), dataObjs(8), dataObjs(12)], 'Authenticated current TESLA keychain and salt', 'Authenticated current level-2 key', 'All messages')
-% legend('Location', 'northwest')
+% legend([dataObjs(4), dataObjs(8), dataObjs(12)], 'Authenticated current TESLA keychain and salt', 'Authenticated current level-2 key', 'All OTAR messages')
+% legend([dataObjs(4), dataObjs(8)], 'Authenticated current level-2 key', 'All OTAR messages')
+legend('Location', 'northwest')
 
 %% Change ylim
 ylim([0 .08])
@@ -32,7 +33,7 @@ yticks([60, 5*60, 10*60, 30*60, 60*60])
 yticklabels({'1 minute', '5 minutes', '10 minutes', '30 minutes', '1 hour'})
 
 %% Change xlim
-xlim([200 2200])
+xlim([200 2000])
 
 %% Change y axis title
 ylabel('Time to receive set of messages')
@@ -42,5 +43,22 @@ xlabel('Word Error Rate (WER)')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Save plot as a png
-filename = 'TESLA-WER-Sensitivity';
+filename = 'ECDSA-WER-Sensitivity';
 print(filename, '-dpng', '-r300')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
