@@ -149,9 +149,4 @@ classdef OTARSimulator < handle
         
     end
     
-    
-    
-    
-    
-    
 end

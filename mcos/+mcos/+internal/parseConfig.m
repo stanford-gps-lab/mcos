@@ -5,7 +5,7 @@ function res = parseConfig(varargin)
 parser = inputParser;
 
 % Scheme
-validSchemeFn = @(x) (strcmp(x, 'TESLA')) || (strcmp(x, 'ECDSA'));
+validSchemeFn = @(x) (strcmp(x, 'TESLA')) || (strcmp(x, 'ECDSA')) || (strcmp(x, 'ECSchnorr'));
 parser.addParameter('Scheme', validSchemeFn)
 
 % SaveData
@@ -98,7 +98,6 @@ parser.addParameter('Weights', [])
 validPlottingParametersFn = @(x) isa(x, 'cell');
 parser.addParameter('PlottingParameters', {}, validPlottingParametersFn)
 
-
 %% Run parser and set results
 try
     parser.parse(varargin{:})
@@ -106,10 +105,5 @@ catch
     error('Error while parsing inputs from config.m')
 end
 res = parser.Results;
-
-
-
-
-
 
 end

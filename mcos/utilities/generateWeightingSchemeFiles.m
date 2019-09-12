@@ -4,11 +4,11 @@
 clear; close all; clc;
 
 %% Set filename
-filename = 'Hameed-Semi-Rigid-ECDSA-RevC-100';
+filename = 'Hameed-Standard-ECSchnorr-RevA-100';
 
 %% Set algorithm to be used
 % Options: Hameed-Standard, Hameed-Semi-Rigid, Hameed-Split
-algorithm = 'Hameed-Semi-Rigid';
+algorithm = 'Hameed-Standard';
 
 %% Set weights to be used
 inputWeights = [100, 1];     % Input weights to be used.

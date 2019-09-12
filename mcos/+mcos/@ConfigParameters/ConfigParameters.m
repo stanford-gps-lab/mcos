@@ -126,11 +126,6 @@ classdef ConfigParameters
         
         function obj = ConfigParameters(varargin)
             
-            % handle an empty constructor
-%             if nargin < 1
-%                 error('No configurations input.')
-%             end
-            
             % Parse inputs
             res = mcos.internal.parseConfig(varargin{:});
             

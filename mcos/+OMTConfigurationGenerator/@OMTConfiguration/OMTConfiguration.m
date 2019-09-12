@@ -96,6 +96,8 @@ classdef OMTConfiguration < handle
                 obj.SBASAuthenticationMessage = mcos.SBASECDSAMessage(configParameters);
             elseif (strcmp(configParameters.Scheme, 'TESLA'))
                 obj.SBASAuthenticationMessage = mcos.SBASTESLAMessage(configParameters);
+            elseif (strcmp(configParameters.Scheme, 'ECSchnorr'))
+                obj.SBASAuthenticationMessage = mcos.SBASECSchnorrMessage(configParameters);
             end
             
             % Assign Properties from completeOMTConfiguration
