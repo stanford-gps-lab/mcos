@@ -15,13 +15,13 @@ legend('AutoUpdate', 'off')
 line(xlim, [5*60 5*60], 'LineStyle', '-.', 'Color', 'k', 'LineWidth', 2)
 
 %% Change Title
-title('ECDSA impact of WER on OMT reception')
+title('TESLA impact of WER on OMT reception')
 
 %% Change legend sensitivity plots
 % fig = gcf;
 % axObjs = fig.Children;
-% dataObjs = axObjs.Children;
-% legend([dataObjs(4), dataObjs(8), dataObjs(12)], 'Authenticated current TESLA keychain and salt', 'Authenticated current level-2 key', 'All OTAR messages')
+% dataObjs = [axObjs.Children];
+legend([dataObjs(4), dataObjs(8), dataObjs(12)], 'Authenticated current TESLA keychain and salt', 'Authenticated current level-2 key', 'All OTAR messages')
 % legend([dataObjs(4), dataObjs(8)], 'Authenticated current level-2 key', 'All OTAR messages')
 legend('Location', 'northwest')
 
@@ -43,7 +43,7 @@ xlabel('Word Error Rate (WER)')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Save plot as a png
-filename = 'ECDSA-WER-Sensitivity';
+filename = 'TESLA-WER-Sensitivity';
 print(filename, '-dpng', '-r300')
 
 
