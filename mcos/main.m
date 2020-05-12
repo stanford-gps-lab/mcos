@@ -52,7 +52,9 @@ omtConfiguration = OMTConfigurationGenerator.OMTConfiguration(configParameters);
 % multiple values
 
 %% Run Simulator
+tic
 otarSimulator = mcos.OTARSim.OTARSimulator(configParameters, omtConfiguration);
+toc
 
 %% Plot results
 mcos.internal.plotOTARResults(configParameters, omtConfiguration, otarSimulator);

@@ -8,12 +8,12 @@ function configParameters = config(plotStr)
 if nargin < 1 % Skip if plotData is being called
     % Simulation Parameters
     scheme = 'TESLA'; % Scheme - 'TESLA', 'ECDSA', or 'ECSchnorr'
-    saveData = false;   % SaveData - true or false
+    saveData = true;   % SaveData - true or false
     frequency = 'L5';   % Frequency - 'L1' or 'L5'
     channel = 'I';  % Channel - 'I' or 'Q'
     numDiffKeys = 1;    % NumDiffKeys - Number of different keys used to sign data. Nominally 1.
     messageAuthenticationLength = false;    % MessageAuthenticationLength - Boolean. Include number of messages authenticated or not in authentication message.
-    per = 0;    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
+    per = logspace(-5, -1, 125);    % PER - Page Error Rate. Nominally 0. Can be an array for sensitivity analyses.
     minLengthOTARMessage = 0;   % MinLengthOTARMessage [messages] - minimum length that an OTAR message is. Nominally 0.
     tba = 6;    % TBA [s] - Time between authentications. Must be greater than the length of the signature
     simLength = 10000;   % SimLength [OTAR messages] - How many OTAR messages are generated for broadcast
@@ -37,14 +37,14 @@ if nargin < 1 % Skip if plotData is being called
     
     % TESLA parameters
     teslaKeyLengthBits = 115;   % TESLAKeyLengthBits [bits] - Length of the TESLA keys
-    teslaMACLengthBits = 30;    % TESLAMACLengthBits [bits] - Length of the TESLA MAC
+    teslaMACLengthBits = 75;    % TESLAMACLengthBits [bits] - Length of the TESLA MAC
     teslaSaltLengthBits = 30;   % TESLASaltLengthBits [bits] - Length of the TESLA salt
     
     % Plotting parameters
     plottingParameters = {...
                 'Total';                                          % Plots time to get all information
         %         'OMT';                                            % Plots time to get all OMTs individually
-                'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
+%                 'Authenticated current level 2 key';              % Plots time to get authenticated current level 2 key
         %         'Expiration of current keys';                     % Plots time to get expiration of current keys
         %         'Authenticated next level 2 key';                 % Plots time to get authenticated next level 2 key
         %         'Expiration of next keys';                        % Plots time to get expiration of next keys
