@@ -21,11 +21,11 @@ if nargin < 1 % Skip if plotData is being called
     % received
     numUsers = 1;   % NumUsers - Number of users that start demodulating at each time interval. Nominally 1.
     weightingSchemeFile = 'Hameed-Standard-TESLA-RevC-100.mat';   % WeightingSchemeFile - Can be an array for sensitivity analyses.
-    omtConfigurationFile = 'TESLA_RevC_ECSchnorr.mat';  % MessageConfiguration - File containing message configuration information.
+    omtConfigurationFile = 'TESLA_RevD_ECSchnorr.mat';  % MessageConfiguration - File containing message configuration information.
     qChannelCRCBits = 0;    % QChannelCRCBits - CRC bits included in the Q channel
     level1PublicKeyLengthBits = 384 + 1;   % Level1PublicKeyLengthBits - Length of the level 1 public key in bits
     level2PublicKeyLengthBits = 224 + 1;   % Level2PublicKeyLengthBits - Length of the level 2 public key in bits
-    if (strcmpi(scheme, 'ECSchnorr')) || (strcmpi(omtConfigurationFile, 'TESLA_RevC_ECSchnorr.mat'))
+    if (strcmpi(scheme, 'ECSchnorr')) || (strcmpi(omtConfigurationFile, 'TESLA_RevD_ECSchnorr.mat'))
         level1SignatureLengthBits = 384*3/2;  % Level1SignatureLengthBits - Length of the level-1 signature in bits
         level2SignatureLengthBits = 224*3/2;  % Level2SignatureLengthBits - Length of the level-2 siganture in bits
     else
